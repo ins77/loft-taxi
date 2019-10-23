@@ -17,8 +17,26 @@ const styles = {
 };
 
 class AuthPage extends Component {
+  state = {
+    showSignIn: true,
+    showSignUp: false,
+  }
+
+  onChangeToSignUp = event => {
+    event.preventDefault();
+
+    this.setState({ showSignIn: false, showSignUp: true });
+  }
+
+  onChangeToSignIn = event => {
+    event.preventDefault();
+
+    this.setState({ showSignIn: true, showSignUp: false });
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, onAuthSubmit } = this.props;
+    const { showSignIn, showSignUp } = this.state;
 
     return (
       <Box display="flex" height="100%" className={classes.wrap}>
@@ -30,8 +48,8 @@ class AuthPage extends Component {
               </Box>
             </Grid>
             <Grid item xs={6}>
-              <SignIn />
-              <SignUp />
+              {showSignIn && <SignIn onSignInSubmit={onAuthSubmit} onChangeToSignUp={this.onChangeToSignUp} />}
+              {showSignUp && <SignUp onSignUpSubmit={onAuthSubmit} onChangeToSignIn={this.onChangeToSignIn} />}
             </Grid>
           </Grid>
         </Container>

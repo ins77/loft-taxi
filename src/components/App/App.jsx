@@ -6,11 +6,28 @@ import Layout from '../Layout';
 import { theme } from '../utils';
 
 class App extends Component {
+  state = {
+    showAuthPage: true,
+    showContentPage: false,
+  }
+
+  onAuthSubmit = event => {
+    event.preventDefault();
+
+    this.setState({ showContentPage: true, showAuthPage: false });
+  }
+
+  onSignOut = () => {
+    this.setState({ showContentPage: false, showAuthPage: true });
+  }
+
   render() {
+    const { showAuthPage, showContentPage } = this.state;
+
     return (
       <MuiThemeProvider theme={theme}>
-        <AuthPage />
-        <Layout />
+        {showAuthPage && <AuthPage onAuthSubmit={this.onAuthSubmit} />}
+        {showContentPage && <Layout onSignOut={this.onSignOut} />}
       </MuiThemeProvider>
     );
   }

@@ -3,15 +3,15 @@ import { Typography, Box, Link, TextField, Grid, Button } from '@material-ui/cor
 
 import AuthFormWrapper from './AuthFormWrapper';
 
-const SignUp = () => (
+const SignUp = ({ onChangeToSignIn, onSignUpSubmit }) => (
   <AuthFormWrapper>
     <Typography variant="h5" component="h3">Регистрация</Typography>
     <Box mt={1}>
       <Typography variant="body1">
-        Уже зарегистрирован? <Link href="#">Войти</Link>
+        Уже зарегистрирован? <Link href="#" onClick={onChangeToSignIn}>Войти</Link>
       </Typography>
     </Box>
-    <form noValidate onSubmit={null}>
+    <form noValidate onSubmit={onSignUpSubmit}>
       <TextField fullWidth error margin="normal" label="Адрес электронной почты" required helperText="Ошибка" type="email" />
       <Grid container spacing={2}>
         <Grid item xs={6}>

@@ -11,12 +11,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const navLinks = [
-  { id: 0, label: 'Карта' },
-  { id: 1, label: 'Профиль' },
-  { id: 2, label: 'Выйти' },
+  { id: 0, label: 'Карта', route: 'map' },
+  { id: 1, label: 'Профиль', route: 'profile' },
+  { id: 2, label: 'Выйти', route: 'signOut' },
 ];
 
-const Header = () => {
+const Header = ({ onChangePage }) => {
   const classes = useStyles();
 
   return (
@@ -24,8 +24,8 @@ const Header = () => {
       <Toolbar>
         <Logo />
         <Box ml="auto">
-          {navLinks.map(({ id, label }) => (
-            <Button key={id} className={classes.button}>
+          {navLinks.map(({ id, label, route }) => (
+            <Button key={id} className={classes.button} onClick={onChangePage(route)}>
               {label}
             </Button>
           ))}
