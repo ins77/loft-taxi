@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Grid, Box } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 import bg from '../assets/images/bg.jpg';
 import Logo from './Logo';
@@ -17,10 +18,12 @@ const styles = {
 
 class AuthPage extends Component {
   render() {
+    const { classes } = this.props;
+
     return (
-      <Box display="flex" height="100%" style={styles.wrap}>
+      <Box display="flex" height="100%" className={classes.wrap}>
         <Container maxWidth="md">
-          <Grid container style={styles.grid} alignItems="center">
+          <Grid container className={classes.grid} alignItems="center">
             <Grid item xs={6}>
               <Box display="flex" justifyContent="center">
                 <Logo variant="light" />
@@ -37,4 +40,4 @@ class AuthPage extends Component {
   }
 }
 
-export default AuthPage;
+export default withStyles(styles)(AuthPage);
