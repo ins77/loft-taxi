@@ -1,8 +1,7 @@
 import React from 'react';
-import { Typography, Box, Link, TextField } from '@material-ui/core';
+import { Typography, Box, Link, TextField, Button } from '@material-ui/core';
 
 import AuthFormWrapper from './AuthFormWrapper';
-import Button from './Button';
 
 const SignIn = () => {
   return (

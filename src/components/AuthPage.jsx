@@ -7,10 +7,10 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 const styles = {
-  authPage: {
+  wrap: {
     background: `url(${bg}) 0 0 no-repeat / cover`,
   },
-  gridContainer: {
+  grid: {
     height: '100%',
   },
 };
@@ -18,9 +18,9 @@ const styles = {
 class AuthPage extends Component {
   render() {
     return (
-      <Box display="flex" height="100%" style={styles.authPage}>
+      <Box display="flex" height="100%" style={styles.wrap}>
         <Container maxWidth="md">
-          <Grid container style={styles.gridContainer} alignItems="center">
+          <Grid container style={styles.grid} alignItems="center">
             <Grid item xs={6}>
               <Box display="flex" justifyContent="center">
                 <Logo variant="light" />
