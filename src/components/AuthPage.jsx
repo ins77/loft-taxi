@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Grid, Box } from '@material-ui/core';
 
-import bg from '../../assets/images/bg.jpg';
-import Logo from '../Logo/Logo';
-import SignIn from '../SignIn/SignIn';
-import SignUp from '../SignUp/SignUp';
+import bg from '../assets/images/bg.jpg';
+import Logo from './Logo';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 const styles = {
   authPage: {
