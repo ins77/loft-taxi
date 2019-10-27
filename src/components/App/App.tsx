@@ -5,13 +5,13 @@ import AuthPage from '../AuthPage';
 import Layout from '../Layout';
 import { theme } from '../utils';
 
-type AppState = {
+type State = {
   showAuthPage: boolean;
   showContentPage: boolean;
 };
 
-class App extends Component<AppState> {
-  state: AppState = {
+class App extends Component<State> {
+  state: State = {
     showAuthPage: true,
     showContentPage: false,
   }

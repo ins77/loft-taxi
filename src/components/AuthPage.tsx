@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-interface Props {
+type Props = {
   onAuthSubmit(event: React.SyntheticEvent): void;
   classes: {
     wrap: any;
