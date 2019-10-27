@@ -2,19 +2,10 @@ import React, { Component } from 'react';
 import { Container, Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import bg from '../assets/images/bg.jpg';
-import Logo from './Logo';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-
-const styles = {
-  wrap: {
-    background: `url(${bg}) 0 0 no-repeat / cover`,
-  },
-  grid: {
-    height: '100%',
-  },
-};
+import bg from '../../assets/images/bg.jpg';
+import Logo from '../Logo';
+import SignIn from '../SignIn';
+import SignUp from '../SignUp';
 
 interface AuthPageProps {
   onAuthSubmit(event: React.SyntheticEvent): void;
@@ -27,6 +18,15 @@ interface AuthPageProps {
 interface AuthPageState {
   showSignIn: boolean;
   showSignUp: boolean;
+};
+
+const styles = {
+  wrap: {
+    background: `url(${bg}) 0 0 no-repeat / cover`,
+  },
+  grid: {
+    height: '100%',
+  },
 };
 
 class AuthPage extends Component<AuthPageProps, AuthPageState> {

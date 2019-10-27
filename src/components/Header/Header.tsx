@@ -2,10 +2,10 @@ import React from 'react';
 import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Logo from './Logo';
+import Logo from '../Logo';
 
 interface HeaderProps {
-  onChangePage(route: string): (event: React.SyntheticEvent) => void; 
+  onChangePage(event: React.SyntheticEvent, route: string): void; 
 };
 
 interface NavLinks {
@@ -35,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({ onChangePage }) => {
         <Logo />
         <Box ml="auto">
           {navLinks.map(({ id, label, route }) => (
-            <Button key={id} className={classes.button} onClick={onChangePage(route)}>
+            <Button key={id} className={classes.button} onClick={(event) => onChangePage(event, route)}>
               {label}
             </Button>
           ))}

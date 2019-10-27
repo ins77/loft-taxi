@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
-import Header from './Header';
-import MapPage from './MapPage';
-import ProfilePage from './ProfilePage';
+import Header from '../Header';
+import MapPage from '../MapPage';
+import ProfilePage from '../ProfilePage';
 
 interface LayoutProps {
   onSignOut(): void;
@@ -28,7 +28,7 @@ class Layout extends Component<LayoutProps, LayoutState> {
     showProfilePage: false,
   }
 
-  onChangePage = (route: string) => (event: React.SyntheticEvent) => {
+  onChangePage = (event: React.SyntheticEvent, route: string) => {
     event.preventDefault();
 
     if (route === 'signOut') {
@@ -44,11 +44,11 @@ class Layout extends Component<LayoutProps, LayoutState> {
     const { showMapPage, showProfilePage } = this.state;
 
     return (
-      <>
+      <Fragment>
         <Header onChangePage={this.onChangePage} />
         {showMapPage && <MapPage />}
         {showProfilePage && <ProfilePage />}
-      </>
+      </Fragment>
     );
   }
 }

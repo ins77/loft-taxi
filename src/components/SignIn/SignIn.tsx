@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Box, Link, TextField, Button } from '@material-ui/core';
 
-import AuthFormWrapper from './AuthFormWrapper';
+import AuthFormWrapper from '../AuthFormWrapper';
 
 interface SignInProps {
   onSignInSubmit(event: React.SyntheticEvent): void;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Box, Link, TextField, Grid, Button } from '@material-ui/core';
 
-import AuthFormWrapper from './AuthFormWrapper';
+import AuthFormWrapper from '../AuthFormWrapper';
 
 interface SignUpProps {
   onChangeToSignIn(event: React.SyntheticEvent): void;
