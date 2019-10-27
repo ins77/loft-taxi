@@ -4,18 +4,31 @@ import Header from './Header';
 import MapPage from './MapPage';
 import ProfilePage from './ProfilePage';
 
-const routesMap = {
+type Props = {
+  onSignOut(): void;
+};
+
+type State = {
+  showMapPage: boolean;
+  showProfilePage: boolean;
+};
+
+type RoutesMap = {
+  [propName: string]: State;
+};
+
+const routesMap: RoutesMap = {
   map:     { showMapPage: true, showProfilePage: false },
   profile: { showMapPage: false, showProfilePage: true },
 }
 
-class Layout extends Component {
-  state = {
+class Layout extends Component<Props, State> {
+  state: State = {
     showMapPage: true,
     showProfilePage: false,
   }
 
-  onChangePage = route => event => {
+  onChangePage = (route: string) => (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     if (route === 'signOut') {

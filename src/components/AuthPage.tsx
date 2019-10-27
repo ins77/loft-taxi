@@ -16,19 +16,32 @@ const styles = {
   },
 };
 
-class AuthPage extends Component {
+interface Props {
+  onAuthSubmit(event: React.SyntheticEvent): void;
+  classes: {
+    wrap: any;
+    grid: any;
+  };
+}
+
+type State = {
+  showSignIn: boolean;
+  showSignUp: boolean;
+};
+
+class AuthPage extends Component<Props, State> {
   state = {
     showSignIn: true,
     showSignUp: false,
   }
 
-  onChangeToSignUp = event => {
+  onChangeToSignUp = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     this.setState({ showSignIn: false, showSignUp: true });
   }
 
-  onChangeToSignIn = event => {
+  onChangeToSignIn = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     this.setState({ showSignIn: true, showSignUp: false });

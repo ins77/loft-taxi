@@ -5,13 +5,18 @@ import AuthPage from '../AuthPage';
 import Layout from '../Layout';
 import { theme } from '../utils';
 
-class App extends Component {
-  state = {
+type AppState = {
+  showAuthPage: boolean;
+  showContentPage: boolean;
+};
+
+class App extends Component<AppState> {
+  state: AppState = {
     showAuthPage: true,
     showContentPage: false,
   }
 
-  onAuthSubmit = event => {
+  onAuthSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     this.setState({ showContentPage: true, showAuthPage: false });

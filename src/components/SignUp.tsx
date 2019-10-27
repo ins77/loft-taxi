@@ -3,7 +3,12 @@ import { Typography, Box, Link, TextField, Grid, Button } from '@material-ui/cor
 
 import AuthFormWrapper from './AuthFormWrapper';
 
-const SignUp = ({ onChangeToSignIn, onSignUpSubmit }) => (
+type Props = {
+  onChangeToSignIn(event: React.SyntheticEvent): void;
+  onSignUpSubmit(event: React.SyntheticEvent): void;
+};
+
+const SignUp: React.FC<Props> = ({ onChangeToSignIn, onSignUpSubmit }) => (
   <AuthFormWrapper>
     <Typography variant="h5" component="h3">Регистрация</Typography>
     <Box mt={1}>
