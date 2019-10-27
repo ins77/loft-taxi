@@ -10,7 +10,7 @@ type State = {
   showContentPage: boolean;
 };
 
-class App extends Component<State> {
+class App extends Component<null, State> {
   state: State = {
     showAuthPage: true,
     showContentPage: false,

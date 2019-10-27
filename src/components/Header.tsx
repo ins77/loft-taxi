@@ -30,7 +30,7 @@ const Header: React.FC<Props> = ({ onChangePage }) => {
   const classes = useStyles();
 
   return (
-    <AppBar position="static">
+    <AppBar position="relative">
       <Toolbar>
         <Logo />
         <Box ml="auto">
