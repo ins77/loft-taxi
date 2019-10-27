@@ -4,26 +4,26 @@ import Header from './Header';
 import MapPage from './MapPage';
 import ProfilePage from './ProfilePage';
 
-type Props = {
+interface LayoutProps {
   onSignOut(): void;
 };
 
-type State = {
+interface LayoutState {
   showMapPage: boolean;
   showProfilePage: boolean;
 };
 
-type RoutesMap = {
-  [propName: string]: State;
+interface RoutesMap {
+  [propName: string]: LayoutState;
 };
 
 const routesMap: RoutesMap = {
   map:     { showMapPage: true, showProfilePage: false },
   profile: { showMapPage: false, showProfilePage: true },
-}
+};
 
-class Layout extends Component<Props, State> {
-  state: State = {
+class Layout extends Component<LayoutProps, LayoutState> {
+  state: LayoutState = {
     showMapPage: true,
     showProfilePage: false,
   }

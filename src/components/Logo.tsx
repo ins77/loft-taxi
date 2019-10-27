@@ -3,9 +3,11 @@ import React from 'react';
 import logo from '../assets/images/logo.png';
 import logoLight from '../assets/images/logo-light.png';
 
-type Props = { variant?: string };
+interface LogoProps {
+  variant?: string;
+};
 
-const Logo: React.FC<Props> = ({ variant }) => (
+const Logo: React.FC<LogoProps> = ({ variant }) => (
   <img src={variant === 'light' ? logoLight : logo} alt="Loft Taxi" />
 );
 

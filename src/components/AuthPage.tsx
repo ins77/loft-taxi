@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-type Props = {
+interface AuthPageProps {
   onAuthSubmit(event: React.SyntheticEvent): void;
   classes: {
     wrap: any;
@@ -24,13 +24,13 @@ type Props = {
   };
 }
 
-type State = {
+interface AuthPageState {
   showSignIn: boolean;
   showSignUp: boolean;
 };
 
-class AuthPage extends Component<Props, State> {
-  state = {
+class AuthPage extends Component<AuthPageProps, AuthPageState> {
+  state: AuthPageState = {
     showSignIn: true,
     showSignUp: false,
   }

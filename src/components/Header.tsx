@@ -4,11 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Logo from './Logo';
 
-type Props = {
+interface HeaderProps {
   onChangePage(route: string): (event: React.SyntheticEvent) => void; 
 };
 
-type NavLinks = {
+interface NavLinks {
   id: number;
   label: string;
   route: string;
@@ -26,7 +26,7 @@ const navLinks: NavLinks[] = [
   { id: 2, label: 'Выйти', route: 'signOut' },
 ];
 
-const Header: React.FC<Props> = ({ onChangePage }) => {
+const Header: React.FC<HeaderProps> = ({ onChangePage }) => {
   const classes = useStyles();
 
   return (
