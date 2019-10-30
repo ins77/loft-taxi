@@ -3,10 +3,7 @@ import React, { Component, Fragment } from 'react';
 import Header from '../Header';
 import MapPage from '../MapPage';
 import ProfilePage from '../ProfilePage';
-
-interface LayoutProps {
-  onSignOut(): void;
-};
+import { AuthContext } from '../AuthContext';
 
 interface LayoutState {
   showMapPage: boolean;
@@ -22,7 +19,9 @@ const routesMap: RoutesMap = {
   profile: { showMapPage: false, showProfilePage: true },
 };
 
-class Layout extends Component<LayoutProps, LayoutState> {
+class Layout extends Component<{}, LayoutState> {
+  static contextType = AuthContext;
+
   state: LayoutState = {
     showMapPage: true,
     showProfilePage: false,
@@ -32,7 +31,7 @@ class Layout extends Component<LayoutProps, LayoutState> {
     event.preventDefault();
 
     if (route === 'signOut') {
-      this.props.onSignOut();
+      this.context.logout();
 
       return;
     };

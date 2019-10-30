@@ -1,41 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core';
 
-import AuthPage from '../AuthPage';
-import Layout from '../Layout';
 import { theme } from '../utils';
+import { AuthProvider } from '../AuthContext';
+import Main from '../Main';
 
-interface AppState {
-  showAuthPage: boolean;
-  showContentPage: boolean;
-};
-
-class App extends Component<null, AppState> {
-  state: AppState = {
-    showAuthPage: true,
-    showContentPage: false,
-  }
-
-  onAuthSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
-    this.setState({ showContentPage: true, showAuthPage: false });
-  }
-
-  onSignOut = () => {
-    this.setState({ showContentPage: false, showAuthPage: true });
-  }
-
-  render() {
-    const { showAuthPage, showContentPage } = this.state;
-
-    return (
-      <MuiThemeProvider theme={theme}>
-        {showAuthPage && <AuthPage onAuthSubmit={this.onAuthSubmit} />}
-        {showContentPage && <Layout onSignOut={this.onSignOut} />}
-      </MuiThemeProvider>
-    );
-  }
-}
+const App: React.FC = () => (
+  <AuthProvider>
+    <MuiThemeProvider theme={theme}>
+      <Main />
+    </MuiThemeProvider>
+  </AuthProvider>
+);
 
 export default App;

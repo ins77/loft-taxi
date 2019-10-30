@@ -6,12 +6,12 @@ import bg from '../../assets/images/bg.jpg';
 import Logo from '../Logo';
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
+import { AuthContext } from '../AuthContext';
 
 interface AuthPageProps {
-  onAuthSubmit(event: React.SyntheticEvent): void;
   classes: {
-    wrap: any;
-    grid: any;
+    wrap: string;
+    grid: string;
   };
 }
 
@@ -30,6 +30,8 @@ const styles = {
 };
 
 class AuthPage extends Component<AuthPageProps, AuthPageState> {
+  static contextType = AuthContext;
+
   state: AuthPageState = {
     showSignIn: true,
     showSignUp: false,
@@ -47,8 +49,14 @@ class AuthPage extends Component<AuthPageProps, AuthPageState> {
     this.setState({ showSignIn: true, showSignUp: false });
   }
 
+  onAuthSubmit = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+
+    this.context.login();
+  }
+
   render() {
-    const { classes, onAuthSubmit } = this.props;
+    const { classes } = this.props;
     const { showSignIn, showSignUp } = this.state;
 
     return (
@@ -61,8 +69,8 @@ class AuthPage extends Component<AuthPageProps, AuthPageState> {
               </Box>
             </Grid>
             <Grid item xs={6}>
-              {showSignIn && <SignIn onSignInSubmit={onAuthSubmit} onChangeToSignUp={this.onChangeToSignUp} />}
-              {showSignUp && <SignUp onSignUpSubmit={onAuthSubmit} onChangeToSignIn={this.onChangeToSignIn} />}
+              {showSignIn && <SignIn onSignInSubmit={this.onAuthSubmit} onChangeToSignUp={this.onChangeToSignUp} />}
+              {showSignUp && <SignUp onSignUpSubmit={this.onAuthSubmit} onChangeToSignIn={this.onChangeToSignIn} />}
             </Grid>
           </Grid>
         </Container>

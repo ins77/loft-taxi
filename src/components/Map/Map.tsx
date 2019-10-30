@@ -3,7 +3,6 @@ import mapboxgl from 'mapbox-gl';
 import CSS from 'csstype';
  
 mapboxgl.accessToken = 'pk.eyJ1IjoiaW5zNzciLCJhIjoiY2syMWpjMzhkMDExcTNtbXJ6MHBhemtlNCJ9.ABDFC7l53foY7ZvQimttaQ';
-
 class Map extends Component {
   mapContainer: any;
   map: any;
@@ -12,8 +11,8 @@ class Map extends Component {
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v9',
-      center: [37.621031, 55.753595],
-      zoom: 12,
+      center: [30.2656504, 59.8029126],
+      zoom: 15,
     });
   }
 
