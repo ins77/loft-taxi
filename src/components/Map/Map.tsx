@@ -28,7 +28,9 @@ class Map extends Component {
       width: '100%',
     };
 
-    return <div style={style} ref={el => this.mapContainer = el} />;
+    return <div data-testid="mapbox"
+                style={style}
+                ref={el => this.mapContainer = el} />;
   }
 }
 

@@ -9,6 +9,6 @@ describe('SignIn', () => {
       <SignIn onChangeToSignUp={() => {}} onSignInSubmit={() => {}} />
     );
 
-    expect(queryByTestId('signup-form')).toBeTruthy();
+    expect(queryByTestId('signin-form')).toBeTruthy();
   });
 });
