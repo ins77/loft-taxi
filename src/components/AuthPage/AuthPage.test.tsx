@@ -2,11 +2,8 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import AuthPage from './AuthPage';
-import { AuthContext } from '../AuthContext';
-
-jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
-  Map: () => ({}),
-}));
+import { AuthProvider, AuthContext } from '../AuthContext';
+import Main from '../Main/Main';
 
 describe('AuthPage', () => {
   it('при инициализации отображается SignIn', () => {
@@ -45,29 +42,26 @@ describe('AuthPage', () => {
   });
 
   it('при сабмите формы signIn происходит login', () => {
-    const login = jest.fn(() => true);
-    const { getByTestId } = render(
-      <AuthContext.Provider value={{ isAuthenticated: true, login }}>
-        <AuthPage />
-      </AuthContext.Provider>
-    );
+    const { queryByTestId, getByTestId } = render(<AuthProvider><Main /></AuthProvider>);
 
-    expect(login.mock.calls.length).toEqual(0);
+    expect(queryByTestId('layout')).toBeFalsy();
+    expect(queryByTestId('signin-form')).toBeTruthy();
     fireEvent.submit(getByTestId('signin-form'));
-    expect(login.mock.results[0].value).toBe(true);
+    expect(queryByTestId('layout')).toBeTruthy();
+    expect(queryByTestId('signup-form')).toBeFalsy();
+    expect(queryByTestId('signin-form')).toBeFalsy();
   });
 
   it('при сабмите формы signUp происходит login', () => {
-    const login = jest.fn(() => true);
-    const { getByTestId } = render(
-      <AuthContext.Provider value={{ isAuthenticated: true, login }}>
-        <AuthPage />
-      </AuthContext.Provider>
-    );
+    const { queryByTestId, getByTestId } = render(<AuthProvider><Main /></AuthProvider>);
 
     fireEvent.click(getByTestId('button-to-signup'));
-    expect(login.mock.calls.length).toEqual(0);
+    expect(queryByTestId('layout')).toBeFalsy();
+    expect(queryByTestId('signup-form')).toBeTruthy();
+
     fireEvent.submit(getByTestId('signup-form'));
-    expect(login.mock.results[0].value).toBe(true);
+    expect(queryByTestId('layout')).toBeTruthy();
+    expect(queryByTestId('signup-form')).toBeFalsy();
+    expect(queryByTestId('signin-form')).toBeFalsy();
   });
 });
