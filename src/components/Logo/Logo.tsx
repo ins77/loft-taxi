@@ -8,7 +8,8 @@ interface LogoProps {
 };
 
 const Logo: React.FC<LogoProps> = ({ variant }) => (
-  <img src={variant === 'light' ? logoLight : logo} alt="Loft Taxi" />
+  <img src={variant === 'light' ? logoLight : logo} 
+       alt="loft-taxi-logo" />
 );
 
 export default Logo;
