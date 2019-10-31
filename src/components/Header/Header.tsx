@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const navLinks: NavLinks[] = [
+export const navLinks: NavLinks[] = [
   { id: 0, label: 'Карта', route: 'map' },
   { id: 1, label: 'Профиль', route: 'profile' },
   { id: 2, label: 'Выйти', route: 'signOut' },
@@ -35,7 +35,10 @@ const Header: React.FC<HeaderProps> = ({ onChangePage }) => {
         <Logo />
         <Box ml="auto">
           {navLinks.map(({ id, label, route }) => (
-            <Button key={id} className={classes.button} onClick={(event) => onChangePage(event, route)}>
+            <Button key={id}
+                    data-testid={['button', route].join('-')}
+                    className={classes.button}
+                    onClick={(event) => onChangePage(event, route)}>
               {label}
             </Button>
           ))}
