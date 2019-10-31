@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
-import AuthPage from '../AuthPage';
-import Layout from '../Layout';
+import AuthPage from '../../containers/AuthPage';
+import Layout from '../../containers/Layout';
 import { AuthContext } from '../AuthContext';
 
 const Main: React.FC = () => {

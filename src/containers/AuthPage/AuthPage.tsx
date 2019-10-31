@@ -3,10 +3,10 @@ import { Container, Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import bg from '../../assets/images/bg.jpg';
-import Logo from '../Logo';
-import SignIn from '../SignIn';
-import SignUp from '../SignUp';
-import { AuthContext } from '../AuthContext';
+import Logo from '../../components/Logo';
+import SignIn from '../../components/SignIn';
+import SignUp from '../../components/SignUp';
+import { AuthContext } from '../../components/AuthContext';
 
 interface AuthPageProps {
   classes: {

@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
-import Header from '../Header';
+import Header from '../../components/Header';
 import MapPage from '../MapPage';
 import ProfilePage from '../ProfilePage';
-import { AuthContext } from '../AuthContext';
+import { AuthContext } from '../../components/AuthContext';
 
 interface LayoutState {
   showMapPage: boolean;

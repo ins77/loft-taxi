@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { navLinks } from '../Header/Header';
+import { navLinks } from '../../components/Header/Header';
 import Layout from './Layout';
 
 describe('Layout', () => {

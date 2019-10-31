@@ -13,7 +13,7 @@ const SignUp: React.FC<SignUpProps> = ({ onChangeToSignIn, onSignUpSubmit }) => 
     <Typography variant="h5" component="h3">Регистрация</Typography>
     <Box mt={1}>
       <Typography variant="body1">
-        Уже зарегистрирован?
+        {'Уже зарегистрирован? '}
         <Link href="#" onClick={onChangeToSignIn} data-testid="button-to-signin">
           Войти
         </Link>
