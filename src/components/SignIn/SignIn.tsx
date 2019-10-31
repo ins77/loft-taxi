@@ -13,10 +13,13 @@ const SignIn: React.FC<SignInProps> = ({ onSignInSubmit, onChangeToSignUp }) => 
     <Typography variant="h5" component="h3">Войти</Typography>
     <Box mt={1}>
       <Typography variant="body1">
-        Новый пользователь? <Link href="#" onClick={onChangeToSignUp}>Зарегистрируйтесь</Link>
+        Новый пользователь?
+        <Link href="#" onClick={onChangeToSignUp} data-testid="button-to-signup">
+          Зарегистрируйтесь
+        </Link>
       </Typography>
     </Box>
-    <form noValidate onSubmit={onSignInSubmit}>
+    <form noValidate onSubmit={onSignInSubmit} data-testid="signin-form">
       <TextField fullWidth error margin="normal" label="Имя пользователя" required helperText="Ошибка" />
       <TextField fullWidth error margin="normal" label="Пароль" required helperText="Ошибка" type="password" />
       <Box mt={3} display="flex" justifyContent="flex-end">

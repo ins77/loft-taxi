@@ -43,11 +43,11 @@ class Layout extends Component<{}, LayoutState> {
     const { showMapPage, showProfilePage } = this.state;
 
     return (
-      <Fragment>
+      <div data-testid="layout">
         <Header onChangePage={this.onChangePage} />
         {showMapPage && <MapPage />}
         {showProfilePage && <ProfilePage />}
-      </Fragment>
+      </div>
     );
   }
 }

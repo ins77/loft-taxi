@@ -8,8 +8,11 @@ jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
   Map: () => ({}),
 }));
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(React.createElement(App), div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('App', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(React.createElement(App), div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+})
+

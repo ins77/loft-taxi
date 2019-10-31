@@ -69,8 +69,14 @@ class AuthPage extends Component<AuthPageProps, AuthPageState> {
               </Box>
             </Grid>
             <Grid item xs={6}>
-              {showSignIn && <SignIn onSignInSubmit={this.onAuthSubmit} onChangeToSignUp={this.onChangeToSignUp} />}
-              {showSignUp && <SignUp onSignUpSubmit={this.onAuthSubmit} onChangeToSignIn={this.onChangeToSignIn} />}
+              {showSignIn &&
+                <SignIn onSignInSubmit={this.onAuthSubmit} 
+                        onChangeToSignUp={this.onChangeToSignUp} />
+              }
+              {showSignUp &&
+                <SignUp onSignUpSubmit={this.onAuthSubmit}
+                        onChangeToSignIn={this.onChangeToSignIn} />
+              }
             </Grid>
           </Grid>
         </Container>
