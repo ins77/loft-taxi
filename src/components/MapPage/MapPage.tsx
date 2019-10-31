@@ -3,7 +3,11 @@ import Map from '../Map';
 
 class MapPage extends Component {
   render() {
-    return <Map />;
+    return (
+      <div data-testid="map-page">
+        <Map />
+      </div>
+    );
   }
 }
 
