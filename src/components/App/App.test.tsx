@@ -8,5 +8,4 @@ describe('App', () => {
     ReactDOM.render(React.createElement(App), div);
     ReactDOM.unmountComponentAtNode(div);
   });
-})
-
+});
