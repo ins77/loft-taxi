@@ -1,17 +1,25 @@
 import React from 'react';
 import { Typography, Box, Link, TextField, Grid, Button } from '@material-ui/core';
 
-import AuthFormWrapper from './AuthFormWrapper';
+import AuthFormWrapper from '../AuthFormWrapper';
 
-const SignUp = ({ onChangeToSignIn, onSignUpSubmit }) => (
+interface SignUpProps {
+  onChangeToSignIn(event: React.SyntheticEvent): void;
+  onSignUpSubmit(event: React.SyntheticEvent): void;
+};
+
+const SignUp: React.FC<SignUpProps> = ({ onChangeToSignIn, onSignUpSubmit }) => (
   <AuthFormWrapper>
     <Typography variant="h5" component="h3">Регистрация</Typography>
     <Box mt={1}>
       <Typography variant="body1">
-        Уже зарегистрирован? <Link href="#" onClick={onChangeToSignIn}>Войти</Link>
+        {'Уже зарегистрирован? '}
+        <Link href="#" onClick={onChangeToSignIn} data-testid="button-to-signin">
+          Войти
+        </Link>
       </Typography>
     </Box>
-    <form noValidate onSubmit={onSignUpSubmit}>
+    <form noValidate onSubmit={onSignUpSubmit} data-testid="signup-form">
       <TextField fullWidth error margin="normal" label="Адрес электронной почты" required helperText="Ошибка" type="email" />
       <Grid container spacing={2}>
         <Grid item xs={6}>
