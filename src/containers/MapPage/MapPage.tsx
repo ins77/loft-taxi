@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import Map from '../../components/Map';
+import withLayout from '../../hoc/withLayout/withLayout';
 
 class MapPage extends Component {
   render() {
@@ -11,4 +13,4 @@ class MapPage extends Component {
   }
 }
 
-export default MapPage;
+export default withLayout(MapPage);

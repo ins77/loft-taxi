@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { RouteComponentProps } from 'react-router-dom';
 
 import bg from '../../assets/images/bg.jpg';
 import Logo from '../../components/Logo';
@@ -22,14 +23,14 @@ interface AuthPageState {
 
 const styles = {
   wrap: {
-    background: `url(${bg}) 0 0 no-repeat / cover`,
+    background: `url(${bg}) 0 0 no-repeat`,
   },
   grid: {
     height: '100%',
   },
 };
 
-class AuthPage extends Component<AuthPageProps, AuthPageState> {
+class AuthPage extends Component<AuthPageProps & RouteComponentProps, AuthPageState> {
   static contextType = AuthContext;
 
   state: AuthPageState = {
@@ -53,6 +54,7 @@ class AuthPage extends Component<AuthPageProps, AuthPageState> {
     event.preventDefault();
 
     this.context.login();
+    this.props.history.push('/map');
   }
 
   render() {

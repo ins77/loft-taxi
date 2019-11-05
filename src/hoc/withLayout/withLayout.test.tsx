@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { navLinks } from '../../components/Header/Header';
-import Layout from './Layout';
+import Layout from './withLayout';
 
-describe('Layout', () => {
+describe('withLayout', () => {
   it('при инициализации открыта страница карты', () => {
     const { queryByTestId } = render(<Layout />);
 

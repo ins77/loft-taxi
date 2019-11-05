@@ -1,32 +1,24 @@
 import React from 'react';
 import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
 
 import Logo from '../Logo';
 
 interface HeaderProps {
-  onChangePage(event: React.SyntheticEvent, route: string): void; 
-};
-
-interface NavLinks {
-  id: number;
-  label: string;
-  route: string;
+  onLogout(event: React.SyntheticEvent): void; 
 };
 
 const useStyles = makeStyles(theme => ({
   button: {
     marginLeft: theme.spacing(2),
   },
+  link: {
+    textDecoration: 'none',
+  },
 }));
 
-export const navLinks: NavLinks[] = [
-  { id: 0, label: 'Карта', route: 'map' },
-  { id: 1, label: 'Профиль', route: 'profile' },
-  { id: 2, label: 'Выйти', route: 'signOut' },
-];
-
-const Header: React.FC<HeaderProps> = ({ onChangePage }) => {
+const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   const classes = useStyles();
 
   return (
@@ -34,14 +26,21 @@ const Header: React.FC<HeaderProps> = ({ onChangePage }) => {
       <Toolbar>
         <Logo />
         <Box ml="auto">
-          {navLinks.map(({ id, label, route }) => (
-            <Button key={id}
-                    data-testid={['button', route].join('-')}
-                    className={classes.button}
-                    onClick={(event) => onChangePage(event, route)}>
-              {label}
+          <NavLink to="/map" className={classes.link}>
+            <Button className={classes.button}>
+              Карта
             </Button>
-          ))}
+          </NavLink>
+          <NavLink to="/profile" className={classes.link}>
+            <Button className={classes.button}>
+              Профиль
+            </Button>
+          </NavLink>
+          <Button className={classes.button}
+                  data-testid="button-logout"
+                  onClick={onLogout}>
+            Выйти
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>
