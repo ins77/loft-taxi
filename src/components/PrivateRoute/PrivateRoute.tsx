@@ -6,7 +6,7 @@ const mapStateToProps = (state: any) => ({
   isAuthenticated: state.signIn.isAuthenticated,
 });
 
-const PrivateRoute: React.SFC<any> = (props) => {
+const PrivateRoute: React.FC<any> = (props) => {
   const { component: Component, isAuthenticated, ...restProps } = props;
 
   return (
