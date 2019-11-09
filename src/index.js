@@ -7,6 +7,7 @@ import './index.scss';
 import App from './components/App/App';
 import { signInMiddleware, signUpMiddleware } from './redux/middlewares';
 import reducers from './redux/reducers';
+import { signInSuccess } from './redux/actions';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -16,6 +17,11 @@ const store = createStore(
     applyMiddleware(signUpMiddleware),
   ),
 );
+const token = localStorage.getItem('token');
+
+if (token) {
+  store.dispatch(signInSuccess(token));
+}
 
 ReactDOM.render(
   <Provider store={store}>

@@ -12,14 +12,6 @@ import SignUp from '../../containers/SignUp';
 import * as actionCreators from '../../redux/actions';
 
 class App extends Component<any, any> {
-  componentDidMount() {
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      this.props.signInSuccess(token);
-    }
-  }
-
   render() {
     return (
       <MuiThemeProvider theme={theme}>
