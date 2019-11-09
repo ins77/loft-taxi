@@ -9,7 +9,6 @@ import MapPage from '../../containers/MapPage';
 import ProfilePage from '../../containers/ProfilePage';
 import SignIn from '../../containers/SignIn';
 import SignUp from '../../containers/SignUp';
-import * as actionCreators from '../../redux/actions';
 
 class App extends Component<any, any> {
   render() {
@@ -29,4 +28,4 @@ class App extends Component<any, any> {
   }
 }
 
-export default connect(null, actionCreators)(App);
+export default App;

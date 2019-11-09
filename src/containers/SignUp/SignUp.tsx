@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Typography, Box, Link as MaterialLink, TextField, Grid, Button } from '@material-ui/core';
+import { Typography, Box, TextField, Grid, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -43,11 +43,9 @@ class SignUp extends Component<any, any> {
         <Box mt={1}>
           <Typography variant="body1">
             {'Уже зарегистрирован? '}
-              {/* <MaterialLink href="#" data-testid="button-to-signin"> */}
-                <Link to="/signin">
-                 Войти
-                </Link>
-              {/* </MaterialLink> */}
+              <Link to="/signin">
+                Войти
+              </Link>
           </Typography>
         </Box>
         <form noValidate onSubmit={(event) => this.onSignUpSubmit(event, event.target)} data-testid="signup-form">

@@ -6,34 +6,28 @@ import { RouteComponentProps } from 'react-router-dom';
 import bg from '../../assets/images/bg.jpg';
 import Logo from '../../components/Logo';
 import AuthFormWrapper from '../../components/AuthFormWrapper/AuthFormWrapper';
-
 interface AuthPageProps extends RouteComponentProps {
   classes: {
     wrap: string;
     grid: string;
   };
 }
-
 interface AuthPageState {
   showSignIn: boolean;
   showSignUp: boolean;
 };
 
 const styles = {
-  wrap: {
-    background: `url(${bg}) 0 0 no-repeat`,
-  },
   grid: {
     height: '100%',
   },
 };
-
 class AuthPage extends Component<any, any> {
   render() {
     const { classes, children } = this.props;
 
     return (
-      <Box display="flex" height="100%" className={classes.wrap}>
+      <Box display="flex" height="100%">
         <Container maxWidth="md">
           <Grid container className={classes.grid} alignItems="center">
             <Grid item xs={6}>
