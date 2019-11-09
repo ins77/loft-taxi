@@ -18,6 +18,7 @@ const styles = {
     padding: '16px 32px',
   },
 };
+
 class ProfilePage extends Component<any, any> {
   state = {
     expiryDate: new Date(),
@@ -34,6 +35,13 @@ class ProfilePage extends Component<any, any> {
     const { name, value } = (event.target as HTMLInputElement);
 
     this.setState({ [name]: value });
+  }
+
+  handleCardNumberChange = (event: React.SyntheticEvent) => {
+    const { value } = (event.target as HTMLInputElement);
+    const mappedValue = value.replace(/(\d{4}(?!\s))/g, '$1 ').trim();
+
+    this.setState({ cardNumber: mappedValue });
   }
 
   handleSubmit = (event: any) => {
@@ -74,8 +82,9 @@ class ProfilePage extends Component<any, any> {
                             required helperText="Ошибка"
                             name="cardNumber"
                             value={cardNumber}
-                            onChange={this.handleInputChange}
+                            onChange={this.handleCardNumberChange}
                             InputLabelProps={{ shrink: true }}
+                            inputProps={{ maxLength: 19 }}
                           />
                           <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <DatePicker
