@@ -12,3 +12,9 @@ export const logout = createAction('SIGN_OUT');
 
 export const createSignInData = createAction('CREATE_SIGN_IN_DATA');
 export const createSignUpData = createAction('CREATE_SIGN_UP_DATA');
+
+export const sendCardRequest = createAction('CARD_SEND_REQUEST');
+export const sendCardSuccess = createAction('CARD_SEND_SUCCESS');
+export const sendCardFailure = createAction('CARD_SEND_FAILURE');
+
+export const createUserCardData = createAction('CREATE_USER_CARD_DATA');

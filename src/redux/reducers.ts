@@ -74,8 +74,7 @@ const signInForm = handleActions({
   [actions.createSignInData.toString()](state, { payload }: any) {
     return {
       ...state,
-      email: payload.email,
-      password: payload.password,
+      ...payload,
     };
   },
 }, { email: null, password: null });
@@ -84,17 +83,46 @@ const signUpForm = handleActions({
   [actions.createSignUpData.toString()](state, { payload }: any) {
     return {
       ...state,
-      email: payload.email,
-      name: payload.name,
-      surname: payload.surname,
-      password: payload.password,
+      ...payload,
     };
   },
 }, { email: null, name: null, surname: null, password: null });
 
+const userCardForm = handleActions({
+  [actions.createUserCardData.toString()](state, { payload }: any) {
+    return {
+      ...state,
+      ...payload,
+    };
+  },
+}, { cardNumber: null, cardName: null, cvc: null, expiryDate: null });
+
+const userCard = handleActions({
+  [actions.sendCardRequest.toString()](state, { payload }: any) {
+    return {
+      isLoading: true,
+      error: null,
+    };
+  },
+  [actions.sendCardSuccess.toString()](state, { payload }: any) {
+    return {
+      isLoading: false,
+      error: null,
+    };
+  },
+  [actions.sendCardFailure.toString()](state, { payload }: any) {
+    return {
+      isLoading: false,
+      error: payload,
+    };
+  },
+}, { isLoading: false, error: null });
+
 export default combineReducers({
   signIn,
   signUp,
+  userCard,
   signInForm,
   signUpForm,
+  userCardForm,
 });

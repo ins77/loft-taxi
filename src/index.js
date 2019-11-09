@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 
 import './index.scss';
 import App from './components/App/App';
-import { signInMiddleware, signUpMiddleware } from './redux/middlewares';
+import { signInMiddleware, signUpMiddleware, sendCardMiddleware } from './redux/middlewares';
 import reducers from './redux/reducers';
 import { signInSuccess } from './redux/actions';
 
@@ -15,6 +15,7 @@ const store = createStore(
   composeEnhancers(
     applyMiddleware(signInMiddleware),
     applyMiddleware(signUpMiddleware),
+    applyMiddleware(sendCardMiddleware),
   ),
 );
 const token = localStorage.getItem('token');

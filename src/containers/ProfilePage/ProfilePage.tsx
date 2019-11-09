@@ -3,8 +3,10 @@ import { Paper, Box, Typography, TextField, Grid, Button } from '@material-ui/co
 import { withStyles } from '@material-ui/core/styles';
 import { DatePicker, MuiPickersUtilsProvider, MaterialUiPickersDate } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { connect } from 'react-redux';
 
 import withLayout from '../../hoc/withLayout/withLayout';
+import * as actionCreators from '../../redux/actions';
 
 const styles = {
   text: {
@@ -25,6 +27,23 @@ class ProfilePage extends Component<any, any> {
     this.setState({ selectedDate });
   }
 
+  handleSubmit = (event: any, target: any) => {
+    console.log(123);
+    event.preventDefault();
+
+    const { createUserCardData, sendCardRequest } = this.props;
+    const { cardNumber, cardName, cvc, expiryDate } = target;
+
+    // TODO: контролируемые компоненты
+    createUserCardData({
+      cardNumber: cardNumber.value,
+      cardName: cardName.value,
+      cvc: cvc.value,
+      expiryDate: expiryDate.value,
+    });
+    sendCardRequest();
+  }
+
   render() {
     const { classes } = this.props;
     const { selectedDate } = this.state;
@@ -41,7 +60,7 @@ class ProfilePage extends Component<any, any> {
                 Способ оплаты
               </Typography>
               <Box mt={5}>
-                <form noValidate>
+                <form noValidate onSubmit={(event) => this.handleSubmit(event, event.target)}>
                   <Grid container spacing={4}>
                     <Grid item xs={6}>
                       <Paper className={classes.paper}>
@@ -57,7 +76,7 @@ class ProfilePage extends Component<any, any> {
                               helperText="Ошибка"
                               minDate={new Date("2018-03-01")}
                               maxDate={new Date("2035-06-01")}
-                              name="validity"
+                              name="expiryDate"
                               value={selectedDate}
                               onChange={(date: MaterialUiPickersDate) => this.handleDateChange(date)}
                             />
@@ -68,7 +87,7 @@ class ProfilePage extends Component<any, any> {
                     <Grid item xs={6}>
                       <Paper className={classes.paper}>
                         <Box display="flex" justifyContent="space-around" flexDirection="column" height="100%">
-                          <TextField fullWidth error label="Имя владельца" placeholder="ИМЯ ВЛАДЕЛЬЦА" required helperText="Ошибка" name="name"
+                          <TextField fullWidth error label="Имя владельца" placeholder="ИМЯ ВЛАДЕЛЬЦА" required helperText="Ошибка" name="cardName"
                             InputLabelProps={{ shrink: true }} />
                           <TextField fullWidth error label="CVC" placeholder="000" required helperText="Ошибка" name="cvc"
                             InputLabelProps={{ shrink: true }} inputProps={{ maxLength: 3 }} />
@@ -76,10 +95,10 @@ class ProfilePage extends Component<any, any> {
                       </Paper>
                     </Grid>
                   </Grid>
+                  <Box mt={5} display="flex" justifyContent="center">
+                    <Button variant="contained" type="submit">Сохранить</Button>
+                  </Box>
                 </form>
-              </Box>
-              <Box mt={5}>
-                <Button variant="contained">Сохранить</Button>
               </Box>
             </Box>
           </Paper>
@@ -89,4 +108,4 @@ class ProfilePage extends Component<any, any> {
   }
 }
 
-export default withStyles(styles)(withLayout(ProfilePage));
+export default connect(null, actionCreators)(withStyles(styles)(withLayout(ProfilePage)));
