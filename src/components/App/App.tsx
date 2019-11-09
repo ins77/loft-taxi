@@ -1,27 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { theme } from '../../utils';
-import { AuthProvider } from '../AuthContext';
 import PrivateRoute from '../PrivateRoute';
 import MapPage from '../../containers/MapPage';
 import ProfilePage from '../../containers/ProfilePage';
-import AuthPage from '../../containers/AuthPage';
+import SignIn from '../../containers/SignIn';
+import SignUp from '../../containers/SignUp';
+import * as actionCreators from '../../redux/actions';
 
-const App: React.FC = () => (
-  <AuthProvider>
-    <MuiThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/auth" component={AuthPage} />
-          <PrivateRoute path="/map" component={MapPage} />
-          <PrivateRoute path="/profile" component={ProfilePage} />
-          {/* <Route path="/" exact component={}> */}
-        </Switch>
-      </BrowserRouter>
-    </MuiThemeProvider>
-  </AuthProvider>
-);
+class App extends Component<any, any> {
+  componentDidMount() {
+    const token = localStorage.getItem('token');
 
-export default App;
+    if (token) {
+      this.props.signInSuccess(token);
+    }
+  }
+
+  render() {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+            <PrivateRoute path="/map" component={MapPage} />
+            <PrivateRoute path="/profile" component={ProfilePage} />
+            <Redirect to="/map" />
+          </Switch>
+        </BrowserRouter>
+      </MuiThemeProvider>
+    );
+  }
+}
+
+export default connect(null, actionCreators)(App);

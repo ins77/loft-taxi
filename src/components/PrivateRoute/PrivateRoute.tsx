@@ -1,20 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { AuthContext } from '../AuthContext';
- 
+const mapStateToProps = (state: any) => ({
+  isAuthenticated: state.signIn.isAuthenticated,
+});
+
 const PrivateRoute: React.SFC<any> = (props) => {
-  const { isAuthenticated } = useContext(AuthContext);
-  const { component: Component, ...restProps } = props;
+  const { component: Component, isAuthenticated, ...restProps } = props;
 
   return (
     <Route {...restProps} 
            render={routeProps => (
              isAuthenticated
                ? <Component {...routeProps} />
-               : <Redirect to='/auth' />
+               : <Redirect to='/signin' />
            )} />
   );
 }
  
-export default PrivateRoute;
+export default connect(mapStateToProps)(PrivateRoute);

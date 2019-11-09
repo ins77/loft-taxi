@@ -5,11 +5,9 @@ import { RouteComponentProps } from 'react-router-dom';
 
 import bg from '../../assets/images/bg.jpg';
 import Logo from '../../components/Logo';
-import SignIn from '../../components/SignIn';
-import SignUp from '../../components/SignUp';
-import { AuthContext } from '../../components/AuthContext';
+import AuthFormWrapper from '../../components/AuthFormWrapper/AuthFormWrapper';
 
-interface AuthPageProps {
+interface AuthPageProps extends RouteComponentProps {
   classes: {
     wrap: string;
     grid: string;
@@ -30,36 +28,9 @@ const styles = {
   },
 };
 
-class AuthPage extends Component<AuthPageProps & RouteComponentProps, AuthPageState> {
-  static contextType = AuthContext;
-
-  state: AuthPageState = {
-    showSignIn: true,
-    showSignUp: false,
-  }
-
-  onChangeToSignUp = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
-    this.setState({ showSignIn: false, showSignUp: true });
-  }
-
-  onChangeToSignIn = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
-    this.setState({ showSignIn: true, showSignUp: false });
-  }
-
-  onAuthSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
-    this.context.login();
-    this.props.history.push('/map');
-  }
-
+class AuthPage extends Component<any, any> {
   render() {
-    const { classes } = this.props;
-    const { showSignIn, showSignUp } = this.state;
+    const { classes, children } = this.props;
 
     return (
       <Box display="flex" height="100%" className={classes.wrap}>
@@ -71,14 +42,9 @@ class AuthPage extends Component<AuthPageProps & RouteComponentProps, AuthPageSt
               </Box>
             </Grid>
             <Grid item xs={6}>
-              {showSignIn &&
-                <SignIn onSignInSubmit={this.onAuthSubmit} 
-                        onChangeToSignUp={this.onChangeToSignUp} />
-              }
-              {showSignUp &&
-                <SignUp onSignUpSubmit={this.onAuthSubmit}
-                        onChangeToSignIn={this.onChangeToSignIn} />
-              }
+              <AuthFormWrapper>
+                {children}
+              </AuthFormWrapper>
             </Grid>
           </Grid>
         </Container>

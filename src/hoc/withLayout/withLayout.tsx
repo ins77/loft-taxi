@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Header from '../../components/Header';
-import { AuthContext } from '../../components/AuthContext';
+import * as actionCreators from '../../redux/actions';
 
 const withLayout = (WrappedComponent: React.ComponentType): React.ComponentType => {
-  return class LayoutHOC extends Component {
-    static contextType = AuthContext;
-  
+  class LayoutHOC extends Component<any, any> {
     onLogout = (event: React.SyntheticEvent) => {
       event.preventDefault();
+
+      const { logout } = this.props
     
-      this.context.logout();
+      logout();
+      localStorage.removeItem('token');
     }
   
     render() {
@@ -22,6 +24,8 @@ const withLayout = (WrappedComponent: React.ComponentType): React.ComponentType 
       );
     }
   }
+
+  return connect(null, actionCreators)(LayoutHOC)
 }
 
 export default withLayout;
