@@ -6,7 +6,8 @@ import DateFnsUtils from "@date-io/date-fns";
 import { connect } from 'react-redux';
 
 import withLayout from '../../hoc/withLayout/withLayout';
-import * as actionCreators from '../../redux/actions';
+import { sendCardRequest } from '../../redux/userCard';
+import { createUserCardData } from '../../redux/userCardForm';
 
 const styles = {
   text: {
@@ -148,4 +149,4 @@ class ProfilePage extends Component<any, any> {
   }
 }
 
-export default connect(null, actionCreators)(withStyles(styles)(withLayout(ProfilePage)));
+export default connect(null, { sendCardRequest, createUserCardData })(withStyles(styles)(withLayout(ProfilePage)));

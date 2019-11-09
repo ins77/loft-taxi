@@ -5,9 +5,11 @@ import { Provider } from 'react-redux';
 
 import './index.scss';
 import App from './components/App/App';
-import { signInMiddleware, signUpMiddleware, sendCardMiddleware } from './redux/middlewares';
-import reducers from './redux/reducers';
-import { signInSuccess } from './redux/actions';
+import reducers from './redux';
+import { signInMiddleware } from './redux/signIn';
+import { signUpMiddleware } from './redux/signUp';
+import { sendCardMiddleware } from './redux/userCard';
+import { signInSuccess } from './redux/signIn';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

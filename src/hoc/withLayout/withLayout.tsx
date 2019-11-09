@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../../components/Header';
-import * as actionCreators from '../../redux/actions';
+import { logout } from '../../redux/signIn';
 
 const withLayout = (WrappedComponent: React.ComponentType): React.ComponentType => {
   class LayoutHOC extends Component<any, any> {
@@ -25,7 +25,7 @@ const withLayout = (WrappedComponent: React.ComponentType): React.ComponentType 
     }
   }
 
-  return connect(null, actionCreators)(LayoutHOC)
+  return connect(null, { logout })(LayoutHOC)
 }
 
 export default withLayout;

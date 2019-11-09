@@ -3,11 +3,12 @@ import { Typography, Box, TextField, Grid, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import * as actionCreators from '../../redux/actions';
+import { getSignUp, signUpRequest } from '../../redux/signUp';
+import { createSignUpData } from '../../redux/signUpForm';
 import AuthPage from '../AuthPage';
 
-const mapDispatchToProps = (state: any) => ({
-  signUp: state.signUp,
+const mapStateToProps = (state: any) => ({
+  signUp: getSignUp(state),
 });
 
 class SignUp extends Component<any, any> {
@@ -118,4 +119,4 @@ class SignUp extends Component<any, any> {
   }
 }
 
-export default connect(mapDispatchToProps, actionCreators)(SignUp);
+export default connect(mapStateToProps, { signUpRequest, createSignUpData })(SignUp);
