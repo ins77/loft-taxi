@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import * as actions from './actions';
+import { signUpRequest, signUpSuccess, signUpFailure } from './actions';
 
 export const signUpMiddleware = (store: any) => (next: any) => (action: any): any => {
-  if (action.type === actions.signUpRequest.toString()) {
+  if (action.type === signUpRequest.toString()) {
     const { signUpForm } = store.getState();
 
     axios.post('https://loft-taxi.glitch.me/register', signUpForm)
@@ -12,10 +12,10 @@ export const signUpMiddleware = (store: any) => (next: any) => (action: any): an
           throw new Error(data.error);
         }
 
-        store.dispatch(actions.signUpSuccess(data.token));
+        store.dispatch(signUpSuccess(data.token));
       })
       .catch(({ message, error }) => {
-        store.dispatch(actions.signUpFailure(error || message));
+        store.dispatch(signUpFailure(error || message));
       })
   }
 

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import * as actions from './actions';
+import { sendCardRequest, sendCardSuccess, sendCardFailure } from './actions';
 
 export const sendCardMiddleware = (store: any) => (next: any) => (action: any): any => {
-  if (action.type === actions.sendCardRequest.toString()) {
+  if (action.type === sendCardRequest.toString()) {
     const { signIn: { token }, userCardForm } = store.getState();
 
     axios.post('https://loft-taxi.glitch.me/card', { ...userCardForm, token })
@@ -12,10 +12,10 @@ export const sendCardMiddleware = (store: any) => (next: any) => (action: any): 
           throw new Error(data.error);
         }
 
-        store.dispatch(actions.sendCardSuccess());
+        store.dispatch(sendCardSuccess());
       })
       .catch(({ message, error }) => {
-        store.dispatch(actions.sendCardFailure(error || message));
+        store.dispatch(sendCardFailure(error || message));
       })
   }
 
