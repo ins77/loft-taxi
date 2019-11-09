@@ -11,26 +11,38 @@ const mapStateToProps = (state: any) => ({
 });
 
 class SignIn extends Component<any, any> {
-  componentDidUpdate() {
-    const { signIn: { isAuthenticated }, history } = this.props;
+  state = {
+    email: '',
+    password: '',
+  }
 
-    if (isAuthenticated) {
+  componentDidUpdate(prevProps: any) {
+    const { signIn: { isAuthenticated, token }, history } = this.props;
+    const hasNewToken = token !== prevProps.signIn.token;
+    
+    if (isAuthenticated && hasNewToken) {
       history.push('/map');
     }
   }
 
-  onSignInSubmit = (event: React.SyntheticEvent, target: any) => {
+  handleInputChange = (event: React.SyntheticEvent) => {
+    const { name, value } = (event.target as HTMLInputElement);
+
+    this.setState({ [name]: value });
+  }
+
+  onSignInSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     const { createSignInData, signInRequest } = this.props;
-    const { email, password } = target;
 
-    createSignInData({ email: email.value, password: password.value });
+    createSignInData({ ...this.state });
     signInRequest();
   }
 
   render() {
     const { signIn: { isLoading } } = this.props;
+    const { email, password } = this.state;
 
     return (
       <AuthPage>
@@ -43,9 +55,30 @@ class SignIn extends Component<any, any> {
             </Link>
           </Typography>
         </Box>
-        <form noValidate onSubmit={(event) => this.onSignInSubmit(event, event.target)} data-testid="signin-form">
-          <TextField name="email" fullWidth error margin="normal" label="Email" required helperText="Ошибка" />
-          <TextField name="password" fullWidth error margin="normal" label="Пароль" required helperText="Ошибка" type="password" />
+        <form noValidate onSubmit={this.onSignInSubmit} data-testid="signin-form">
+          <TextField
+            name="email"
+            fullWidth
+            error
+            margin="normal"
+            label="Email"
+            required
+            helperText="Ошибка"
+            value={email}
+            onChange={this.handleInputChange}
+          />
+          <TextField
+            name="password"
+            fullWidth
+            error
+            margin="normal"
+            label="Пароль"
+            required
+            helperText="Ошибка"
+            type="password"
+            value={password}
+            onChange={this.handleInputChange}
+          />
           <Box mt={3} display="flex" justifyContent="flex-end">
             <Button variant="contained" type="submit" disabled={isLoading}>Войти</Button>
           </Box>

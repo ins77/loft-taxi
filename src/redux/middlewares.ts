@@ -12,11 +12,13 @@ export const signInMiddleware = (store: any) => (next: any) => (action: any): an
           throw new Error(data.error);
         }
         
-        if (localStorage.getItem('token') !== data.token) {
-          localStorage.setItem('token', data.token);
+        const { token } = data;
+
+        if (localStorage.getItem('token') !== token) {
+          localStorage.setItem('token', token);
         }
 
-        store.dispatch(actions.signInSuccess(data.token));
+        store.dispatch(actions.signInSuccess(token));
       })
       .catch(({ message, error }) => {
         store.dispatch(actions.signInFailure(error || message));
@@ -49,8 +51,6 @@ export const signUpMiddleware = (store: any) => (next: any) => (action: any): an
 export const sendCardMiddleware = (store: any) => (next: any) => (action: any): any => {
   if (action.type === actions.sendCardRequest.toString()) {
     const { signIn: { token }, userCardForm } = store.getState();
-
-    console.log(token);
 
     axios.post('https://loft-taxi.glitch.me/card', { ...userCardForm, token })
       .then(({ data }) => {

@@ -11,6 +11,13 @@ const mapDispatchToProps = (state: any) => ({
 });
 
 class SignUp extends Component<any, any> {
+  state = {
+    email: '',
+    name: '',
+    surname: '',
+    password: '',
+  }
+
   componentDidUpdate(prevProps: any) {
     const { signUp: { token }, history } = this.props;
 
@@ -19,23 +26,24 @@ class SignUp extends Component<any, any> {
     }
   }
 
-  onSignUpSubmit = (event: React.SyntheticEvent, target: any) => {
+  handleInputChange = (event: React.SyntheticEvent) => {
+    const { name, value } = (event.target as HTMLInputElement);
+
+    this.setState({ [name]: value });
+  }
+
+  onSignUpSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     const { createSignUpData, signUpRequest } = this.props;
-    const { email, password, name, surname } = target;
 
-    createSignUpData({
-      email: email.value,
-      password: password.value,
-      name: name.value,
-      surname: surname.value,
-    });
+    createSignUpData({ ...this.state });
     signUpRequest();
   }
 
   render() {
     const { signUp: { isLoading } } = this.props;
+    const { email, name, surname, password } = this.state;
 
     return (
       <AuthPage>
@@ -48,17 +56,59 @@ class SignUp extends Component<any, any> {
               </Link>
           </Typography>
         </Box>
-        <form noValidate onSubmit={(event) => this.onSignUpSubmit(event, event.target)} data-testid="signup-form">
-          <TextField fullWidth error margin="normal" label="Адрес электронной почты" required helperText="Ошибка" type="email" name="email" />
+        <form noValidate onSubmit={this.onSignUpSubmit} data-testid="signup-form">
+          <TextField 
+            fullWidth
+            error
+            margin="normal"
+            label="Адрес электронной почты"
+            required
+            helperText="Ошибка"
+            type="email"
+            name="email"
+            value={email}
+            onChange={this.handleInputChange}
+          />
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <TextField fullWidth error margin="normal" label="Имя" required helperText="Ошибка" name="name" />
+              <TextField
+                fullWidth
+                error
+                margin="normal"
+                label="Имя"
+                required
+                helperText="Ошибка"
+                name="name"
+                value={name}
+                onChange={this.handleInputChange}
+              />
             </Grid>
             <Grid item xs={6}>
-              <TextField fullWidth error margin="normal" label="Фамилия" required helperText="Ошибка" name="surname" />
+              <TextField
+                fullWidth
+                error
+                margin="normal"
+                label="Фамилия"
+                required
+                helperText="Ошибка"
+                name="surname"
+                value={surname}
+                onChange={this.handleInputChange}
+              />
             </Grid>
           </Grid>
-          <TextField fullWidth error margin="normal" label="Пароль" required helperText="Ошибка" type="password" name="password" />
+          <TextField
+            fullWidth
+            error
+            margin="normal"
+            label="Пароль"
+            required
+            helperText="Ошибка"
+            type="password"
+            name="password"
+            value={password}
+            onChange={this.handleInputChange}
+          />
           <Box mt={3} display="flex" justifyContent="flex-end">
             <Button variant="contained" type="submit" disabled={isLoading}>Зарегистрироваться</Button>
           </Box>

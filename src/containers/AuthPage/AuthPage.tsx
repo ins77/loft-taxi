@@ -3,7 +3,6 @@ import { Container, Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { RouteComponentProps } from 'react-router-dom';
 
-import bg from '../../assets/images/bg.jpg';
 import Logo from '../../components/Logo';
 import AuthFormWrapper from '../../components/AuthFormWrapper/AuthFormWrapper';
 interface AuthPageProps extends RouteComponentProps {

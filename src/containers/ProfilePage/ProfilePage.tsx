@@ -20,33 +20,34 @@ const styles = {
 };
 class ProfilePage extends Component<any, any> {
   state = {
-    selectedDate: new Date(),
+    expiryDate: new Date(),
+    cardName: '',
+    cardNumber: '',
+    cvc: '',
   }
 
-  handleDateChange = (selectedDate: MaterialUiPickersDate) => {
-    this.setState({ selectedDate });
+  handleDateChange = (expiryDate: MaterialUiPickersDate) => {
+    this.setState({ expiryDate });
   }
 
-  handleSubmit = (event: any, target: any) => {
-    console.log(123);
+  handleInputChange = (event: React.SyntheticEvent) => {
+    const { name, value } = (event.target as HTMLInputElement);
+
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit = (event: any) => {
     event.preventDefault();
 
     const { createUserCardData, sendCardRequest } = this.props;
-    const { cardNumber, cardName, cvc, expiryDate } = target;
 
-    // TODO: контролируемые компоненты
-    createUserCardData({
-      cardNumber: cardNumber.value,
-      cardName: cardName.value,
-      cvc: cvc.value,
-      expiryDate: expiryDate.value,
-    });
+    createUserCardData({ ...this.state });
     sendCardRequest();
   }
 
   render() {
     const { classes } = this.props;
-    const { selectedDate } = this.state;
+    const { expiryDate, cardNumber, cardName, cvc } = this.state;
 
     return (
       <div data-testid="profile-page">
@@ -60,13 +61,22 @@ class ProfilePage extends Component<any, any> {
                 Способ оплаты
               </Typography>
               <Box mt={5}>
-                <form noValidate onSubmit={(event) => this.handleSubmit(event, event.target)}>
+                <form noValidate onSubmit={this.handleSubmit}>
                   <Grid container spacing={4}>
                     <Grid item xs={6}>
                       <Paper className={classes.paper}>
                         <Box display="flex" justifyContent="space-around" flexDirection="column" height="100%">
-                          <TextField fullWidth error label="Номер карты" placeholder="0000 0000 0000 0000" required helperText="Ошибка" name="cardNumber" 
-                            InputLabelProps={{ shrink: true }} />
+                          <TextField 
+                            fullWidth
+                            error
+                            label="Номер карты"
+                            placeholder="0000 0000 0000 0000"
+                            required helperText="Ошибка"
+                            name="cardNumber"
+                            value={cardNumber}
+                            onChange={this.handleInputChange}
+                            InputLabelProps={{ shrink: true }}
+                          />
                           <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <DatePicker
                               format="MM/yy"
@@ -77,7 +87,7 @@ class ProfilePage extends Component<any, any> {
                               minDate={new Date("2018-03-01")}
                               maxDate={new Date("2035-06-01")}
                               name="expiryDate"
-                              value={selectedDate}
+                              value={expiryDate}
                               onChange={(date: MaterialUiPickersDate) => this.handleDateChange(date)}
                             />
                           </MuiPickersUtilsProvider>
@@ -87,10 +97,31 @@ class ProfilePage extends Component<any, any> {
                     <Grid item xs={6}>
                       <Paper className={classes.paper}>
                         <Box display="flex" justifyContent="space-around" flexDirection="column" height="100%">
-                          <TextField fullWidth error label="Имя владельца" placeholder="ИМЯ ВЛАДЕЛЬЦА" required helperText="Ошибка" name="cardName"
-                            InputLabelProps={{ shrink: true }} />
-                          <TextField fullWidth error label="CVC" placeholder="000" required helperText="Ошибка" name="cvc"
-                            InputLabelProps={{ shrink: true }} inputProps={{ maxLength: 3 }} />
+                          <TextField
+                            fullWidth
+                            error
+                            label="Имя владельца"
+                            placeholder="ИМЯ ВЛАДЕЛЬЦА"
+                            required
+                            helperText="Ошибка"
+                            name="cardName"
+                            value={cardName}
+                            onChange={this.handleInputChange}
+                            InputLabelProps={{ shrink: true }}
+                          />
+                          <TextField
+                            fullWidth
+                            error
+                            label="CVC"
+                            placeholder="000"
+                            required
+                            helperText="Ошибка"
+                            name="cvc"
+                            value={cvc}
+                            onChange={this.handleInputChange}
+                            InputLabelProps={{ shrink: true }}
+                            inputProps={{ maxLength: 3 }}
+                          />
                         </Box>
                       </Paper>
                     </Grid>
