@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions';
 import * as actions from './actions';
 
 export default handleActions({
-  [actions.createSignUpData.toString()](state, { payload }) {
+  [actions.createSignUpData](state, { payload }) {
     return {
       ...state,
       ...payload,

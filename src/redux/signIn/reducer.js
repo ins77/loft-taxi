@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions';
 import * as actions from './actions';
 
 export default handleActions({
-  [actions.signInRequest.toString()](state) {
+  [actions.signInRequest](state) {
     return {
       ...state,
       isLoading: true,
@@ -12,7 +12,7 @@ export default handleActions({
       isAuthenticated: false,
     };
   },
-  [actions.signInSuccess.toString()](state, { payload }) {
+  [actions.signInSuccess](state, { payload }) {
     return {
       ...state,
       isLoading: false,
@@ -21,7 +21,7 @@ export default handleActions({
       isAuthenticated: true,
     };
   },
-  [actions.signInFailure.toString()](state, { payload }) {
+  [actions.signInFailure](state, { payload }) {
     return {
       ...state,
       isLoading: false,
@@ -30,7 +30,7 @@ export default handleActions({
       isAuthenticated: false,
     };
   },
-  [actions.logout.toString()](state) {
+  [actions.logout](state) {
     return {
       ...state,
       isLoading: false,

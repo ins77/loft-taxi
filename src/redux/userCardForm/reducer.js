@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions';
 import * as actions from './actions';
 
 export default handleActions({
-  [actions.createUserCardData.toString()](state, { payload }) {
+  [actions.createUserCardData](state, { payload }) {
     return {
       ...state,
       ...payload,
