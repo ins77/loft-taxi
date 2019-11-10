@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { signInRequest, getSignIn } from '../../redux/signIn';
-import { createSignInData } from '../../redux/signInForm';
 import AuthPage from '../AuthPage';
 
 const mapStateToProps = state => ({
@@ -36,10 +35,9 @@ class SignIn extends Component {
   onSignInSubmit = event => {
     event.preventDefault();
 
-    const { createSignInData, signInRequest } = this.props;
+    const { signInRequest } = this.props;
 
-    createSignInData({ ...this.state });
-    signInRequest();
+    signInRequest(this.state);
   }
 
   render() {
@@ -97,8 +95,7 @@ SignIn.propTypes = {
     token: PropTypes.string,
   }).isRequired,
   history: PropTypes.object.isRequired,
-  createSignInData: PropTypes.func.isRequired,
   signInRequest: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { signInRequest, createSignInData })(SignIn);
+export default connect(mapStateToProps, { signInRequest })(SignIn);

@@ -4,9 +4,9 @@ import { sendCardRequest, sendCardSuccess, sendCardFailure } from './actions';
 
 export const sendCardMiddleware = store => next => action => {
   if (action.type === sendCardRequest.toString()) {
-    const { signIn: { token }, userCardForm } = store.getState();
+    const { payload } = action; // token, userCardForm
 
-    axios.post('https://loft-taxi.glitch.me/card', { ...userCardForm, token })
+    axios.post('https://loft-taxi.glitch.me/card', payload)
       .then(({ data }) => {
         if (!data.success) {
           throw new Error(data.error);

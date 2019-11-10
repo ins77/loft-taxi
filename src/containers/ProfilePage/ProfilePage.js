@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 
 import withLayout from '../../hoc/withLayout/withLayout';
 import { sendCardRequest } from '../../redux/userCard';
-import { createUserCardData } from '../../redux/userCardForm';
+import { getSignIn } from '../../redux/signIn/selectors';
+import { getUserCard } from '../../redux/userCard/selectors';
 
 const styles = {
   text: {
@@ -20,6 +21,11 @@ const styles = {
     padding: '16px 32px',
   },
 };
+
+const mapStateToProps = state => ({
+  signIn: getSignIn(state),
+  userCard: getUserCard(state),
+});
 
 class ProfilePage extends Component {
   state = {
@@ -49,14 +55,13 @@ class ProfilePage extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { createUserCardData, sendCardRequest } = this.props;
+    const { sendCardRequest, signIn } = this.props;
 
-    createUserCardData({ ...this.state });
-    sendCardRequest();
+    sendCardRequest({ ...this.state, token: signIn.token });
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, userCard: { isLoading } } = this.props;
     const { expiryDate, cardNumber, cardName, cvc } = this.state;
 
     return (
@@ -138,7 +143,7 @@ class ProfilePage extends Component {
                     </Grid>
                   </Grid>
                   <Box mt={5} display="flex" justifyContent="center">
-                    <Button variant="contained" type="submit">Сохранить</Button>
+                    <Button variant="contained" type="submit" disabled={isLoading}>Сохранить</Button>
                   </Box>
                 </form>
               </Box>
@@ -155,8 +160,7 @@ ProfilePage.propTypes = {
     text: PropTypes.string.isRequired,
     paper: PropTypes.string.isRequired,
   }).isRequired,
-  createUserCardData: PropTypes.func.isRequired,
   sendCardRequest: PropTypes.func.isRequired,
 };
 
-export default connect(null, { sendCardRequest, createUserCardData })(withStyles(styles)(withLayout(ProfilePage)));
+export default connect(mapStateToProps, { sendCardRequest })(withStyles(styles)(withLayout(ProfilePage)));

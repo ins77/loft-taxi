@@ -5,7 +5,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { getSignUp, signUpRequest } from '../../redux/signUp';
-import { createSignUpData } from '../../redux/signUpForm';
 import AuthPage from '../AuthPage';
 
 const mapStateToProps = state => ({
@@ -37,9 +36,8 @@ class SignUp extends Component {
   onSignUpSubmit = event => {
     event.preventDefault();
 
-    const { createSignUpData, signUpRequest } = this.props;
+    const { signUpRequest } = this.props;
 
-    createSignUpData({ ...this.state });
     signUpRequest();
   }
 
@@ -126,8 +124,7 @@ SignUp.propTypes = {
     token: PropTypes.string,
   }).isRequired,
   history: PropTypes.object.isRequired,
-  createSignUpData: PropTypes.func.isRequired,
   signUpRequest: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { signUpRequest, createSignUpData })(SignUp);
+export default connect(mapStateToProps, { signUpRequest })(SignUp);

@@ -4,9 +4,9 @@ import { signUpRequest, signUpSuccess, signUpFailure } from './actions';
 
 export const signUpMiddleware = store => next => action => {
   if (action.type === signUpRequest.toString()) {
-    const { signUpForm } = store.getState();
+    const { payload } = action;
 
-    axios.post('https://loft-taxi.glitch.me/register', signUpForm)
+    axios.post('https://loft-taxi.glitch.me/register', payload)
       .then(({ data }) => {
         if (!data.success) {
           throw new Error(data.error);
