@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Typography, Box, TextField, Grid, Button } from '@material-ui/core';
+import { Typography, Box, TextField, Grid, Button, Link } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { getSignUp, signUpRequest } from '../../redux/signUp';
 import { createSignUpData } from '../../redux/signUpForm';
@@ -52,7 +52,7 @@ class SignUp extends Component<any, any> {
         <Box mt={1}>
           <Typography variant="body1">
             {'Уже зарегистрирован? '}
-              <Link to="/signin">
+              <Link component={RouterLink} to="/signin">
                 Войти
               </Link>
           </Typography>
