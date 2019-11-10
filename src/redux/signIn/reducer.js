@@ -13,6 +13,10 @@ export default handleActions({
     };
   },
   [actions.signInSuccess](state, { payload }) {
+    if (localStorage.getItem('token') !== payload) {
+      localStorage.setItem('token', payload);
+    }
+
     return {
       ...state,
       isLoading: false,
@@ -31,6 +35,8 @@ export default handleActions({
     };
   },
   [actions.logout](state) {
+    localStorage.removeItem('token');
+
     return {
       ...state,
       isLoading: false,

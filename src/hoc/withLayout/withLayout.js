@@ -13,7 +13,6 @@ const withLayout = WrappedComponent => {
       const { logout } = this.props
     
       logout();
-      localStorage.removeItem('token');
     }
   
     render() {

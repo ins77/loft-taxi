@@ -14,10 +14,6 @@ export const signInMiddleware = store => next => action => {
         
         const { token } = data;
 
-        if (localStorage.getItem('token') !== token) {
-          localStorage.setItem('token', token);
-        }
-
         store.dispatch(signInSuccess(token));
       })
       .catch(({ message, error }) => {
