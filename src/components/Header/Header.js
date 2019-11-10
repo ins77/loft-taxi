@@ -5,10 +5,6 @@ import { NavLink } from 'react-router-dom';
 
 import Logo from '../Logo';
 
-interface HeaderProps {
-  onLogout(event: React.SyntheticEvent): void; 
-};
-
 const useStyles = makeStyles(theme => ({
   button: {
     marginLeft: theme.spacing(2),
@@ -18,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header: React.FC<HeaderProps> = ({ onLogout }) => {
+const Header = ({ onLogout }) => {
   const classes = useStyles();
 
   return (

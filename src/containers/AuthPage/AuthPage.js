@@ -4,12 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Logo from '../../components/Logo';
 import AuthFormWrapper from '../../components/AuthFormWrapper/AuthFormWrapper';
-interface AuthPageProps {
-  classes: {
-    wrap: string;
-    grid: string;
-  };
-};
+// interface AuthPageProps {
+//   classes: {
+//     wrap: string;
+//     grid: string;
+//   };
+// };
 
 const styles = {
   grid: {
@@ -17,7 +17,7 @@ const styles = {
   },
 };
 
-const AuthPage: React.FC<any> = ({ classes, children }: any) => (
+const AuthPage = ({ classes, children }) => (
   <Box display="flex" height="100%">
     <Container maxWidth="md">
       <Grid container className={classes.grid} alignItems="center">

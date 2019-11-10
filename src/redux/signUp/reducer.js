@@ -3,22 +3,28 @@ import { handleActions } from 'redux-actions';
 import * as actions from './actions';
 
 export default handleActions({
-  [actions.sendCardRequest.toString()](state, { payload }: any) {
+  [actions.signUpRequest.toString()](state) {
     return {
+      ...state,
       isLoading: true,
       error: null,
+      token: null,
     };
   },
-  [actions.sendCardSuccess.toString()](state, { payload }: any) {
+  [actions.signUpSuccess.toString()](state, { payload }) {
     return {
+      ...state,
       isLoading: false,
       error: null,
+      token: payload,
     };
   },
-  [actions.sendCardFailure.toString()](state, { payload }: any) {
+  [actions.signUpFailure.toString()](state, { payload }) {
     return {
+      ...state,
       isLoading: false,
       error: payload,
+      token: null,
     };
   },
-}, { isLoading: false, error: null });
+}, { isLoading: false, token: null, error: null });

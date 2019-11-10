@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { sendCardRequest, sendCardSuccess, sendCardFailure } from './actions';
 
-export const sendCardMiddleware = (store: any) => (next: any) => (action: any): any => {
+export const sendCardMiddleware = store => next => action => {
   if (action.type === sendCardRequest.toString()) {
     const { signIn: { token }, userCardForm } = store.getState();
 

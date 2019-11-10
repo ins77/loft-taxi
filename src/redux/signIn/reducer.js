@@ -12,7 +12,7 @@ export default handleActions({
       isAuthenticated: false,
     };
   },
-  [actions.signInSuccess.toString()](state, { payload }: any) {
+  [actions.signInSuccess.toString()](state, { payload }) {
     return {
       ...state,
       isLoading: false,
@@ -21,7 +21,7 @@ export default handleActions({
       isAuthenticated: true,
     };
   },
-  [actions.signInFailure.toString()](state, { payload }: any) {
+  [actions.signInFailure.toString()](state, { payload }) {
     return {
       ...state,
       isLoading: false,

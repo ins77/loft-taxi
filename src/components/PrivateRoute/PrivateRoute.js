@@ -3,11 +3,11 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getSignIn } from '../../redux/signIn';
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = state => ({
   signIn: getSignIn(state),
 });
 
-const PrivateRoute: React.FC<any> = (props) => {
+const PrivateRoute = (props) => {
   const { component: Component, signIn: { isAuthenticated }, ...restProps } = props;
 
   return (

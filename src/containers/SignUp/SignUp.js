@@ -7,11 +7,11 @@ import { getSignUp, signUpRequest } from '../../redux/signUp';
 import { createSignUpData } from '../../redux/signUpForm';
 import AuthPage from '../AuthPage';
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = state => ({
   signUp: getSignUp(state),
 });
 
-class SignUp extends Component<any, any> {
+class SignUp extends Component {
   state = {
     email: '',
     name: '',
@@ -19,7 +19,7 @@ class SignUp extends Component<any, any> {
     password: '',
   }
 
-  componentDidUpdate(prevProps: any) {
+  componentDidUpdate(prevProps) {
     const { signUp: { token }, history } = this.props;
 
     if (token && token !== prevProps.signUp.token) {
@@ -27,13 +27,13 @@ class SignUp extends Component<any, any> {
     }
   }
 
-  handleInputChange = (event: React.SyntheticEvent) => {
-    const { name, value } = (event.target as HTMLInputElement);
+  handleInputChange = event => {
+    const { name, value } = event.target;
 
     this.setState({ [name]: value });
   }
 
-  onSignUpSubmit = (event: React.SyntheticEvent) => {
+  onSignUpSubmit = event => {
     event.preventDefault();
 
     const { createSignUpData, signUpRequest } = this.props;

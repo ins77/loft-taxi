@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Paper, Box, Typography, TextField, Grid, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { DatePicker, MuiPickersUtilsProvider, MaterialUiPickersDate } from "@material-ui/pickers";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { connect } from 'react-redux';
 
@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-class ProfilePage extends Component<any, any> {
+class ProfilePage extends Component {
   state = {
     expiryDate: new Date(),
     cardName: '',
@@ -28,24 +28,24 @@ class ProfilePage extends Component<any, any> {
     cvc: '',
   }
 
-  handleDateChange = (expiryDate: MaterialUiPickersDate) => {
+  handleDateChange = (expiryDate) => {
     this.setState({ expiryDate });
   }
 
-  handleInputChange = (event: React.SyntheticEvent) => {
-    const { name, value } = (event.target as HTMLInputElement);
+  handleInputChange = event => {
+    const { name, value } = event.target;
 
     this.setState({ [name]: value });
   }
 
-  handleCardNumberChange = (event: React.SyntheticEvent) => {
-    const { value } = (event.target as HTMLInputElement);
+  handleCardNumberChange = event => {
+    const { value } = event.target;
     const mappedValue = value.replace(/(\d{4}(?!\s))/g, '$1 ').trim();
 
     this.setState({ cardNumber: mappedValue });
   }
 
-  handleSubmit = (event: any) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const { createUserCardData, sendCardRequest } = this.props;
@@ -98,7 +98,7 @@ class ProfilePage extends Component<any, any> {
                               maxDate={new Date("2035-06-01")}
                               name="expiryDate"
                               value={expiryDate}
-                              onChange={(date: MaterialUiPickersDate) => this.handleDateChange(date)}
+                              onChange={this.handleDateChange}
                             />
                           </MuiPickersUtilsProvider>
                         </Box>

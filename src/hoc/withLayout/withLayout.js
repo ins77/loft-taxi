@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import Header from '../../components/Header';
 import { logout } from '../../redux/signIn';
 
-const withLayout = (WrappedComponent: React.ComponentType): React.ComponentType => {
-  class LayoutHOC extends Component<any, any> {
-    onLogout = (event: React.SyntheticEvent) => {
+const withLayout = WrappedComponent => {
+  class LayoutHOC extends Component {
+    onLogout = event => {
       event.preventDefault();
 
       const { logout } = this.props

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
-import CSS from 'csstype';
- 
-mapboxgl.accessToken = 'pk.eyJ1IjoiaW5zNzciLCJhIjoiY2syMWpjMzhkMDExcTNtbXJ6MHBhemtlNCJ9.ABDFC7l53foY7ZvQimttaQ';
+
 class Map extends Component {
-  mapContainer: any;
-  map: any;
+  mapContainer;
+  map;
 
   componentDidMount() {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaW5zNzciLCJhIjoiY2syMWpjMzhkMDExcTNtbXJ6MHBhemtlNCJ9.ABDFC7l53foY7ZvQimttaQ';
+
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v9',
@@ -21,7 +21,7 @@ class Map extends Component {
   }
 
   render() {
-    const style: CSS.Properties = {
+    const style = {
       position: 'absolute',
       top: 0,
       bottom: 0,

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { signUpRequest, signUpSuccess, signUpFailure } from './actions';
 
-export const signUpMiddleware = (store: any) => (next: any) => (action: any): any => {
+export const signUpMiddleware = store => next => action => {
   if (action.type === signUpRequest.toString()) {
     const { signUpForm } = store.getState();
 

@@ -11,22 +11,22 @@ describe('Logo', () => {
   });
 
   it('отображается логотип для темного фона, если не переданы пропсы', () => {
-    const { queryByAltText } = render(<Logo />);
-    const imageSource = (queryByAltText('loft-taxi-logo') as HTMLImageElement).src;
+    const { getByAltText } = render(<Logo />);
+    const imageSource = getByAltText('loft-taxi-logo').getAttribute('src');
 
     expect(imageSource).toMatch(/logo.png/);
   });
 
   it('отображается логотип для темного фона, если передан пропс variant со значением не light', () => {
-    const { queryByAltText } = render(<Logo variant="lol" />);
-    const imageSource = (queryByAltText('loft-taxi-logo') as HTMLImageElement).src;
+    const { getByAltText } = render(<Logo variant="lol" />);
+    const imageSource = getByAltText('loft-taxi-logo').getAttribute('src');
 
     expect(imageSource).toMatch(/logo.png/);
   });
 
   it('отображается логотип для светлого фона, если передан пропс variant со значением light', () => {
-    const { queryByAltText } = render(<Logo variant="light" />);
-    const imageSource = (queryByAltText('loft-taxi-logo') as HTMLImageElement).src;
+    const { getByAltText } = render(<Logo variant="light" />);
+    const imageSource = getByAltText('loft-taxi-logo').getAttribute('src');
 
     expect(imageSource).toMatch(/logo-light.png/);
   });

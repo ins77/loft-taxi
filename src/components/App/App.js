@@ -9,7 +9,7 @@ import ProfilePage from '../../containers/ProfilePage';
 import SignIn from '../../containers/SignIn';
 import SignUp from '../../containers/SignUp';
 
-const App: React.FC = () => (
+const App = () => (
   <MuiThemeProvider theme={theme}>
     <BrowserRouter>
       <Switch>
