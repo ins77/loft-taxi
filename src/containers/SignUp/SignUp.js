@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Typography, Box, TextField, Grid, Button, Link } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { getSignUp, signUpRequest } from '../../redux/signUp';
+import { getSignIn } from '../../redux/signIn';
 import AuthPage from '../AuthPage';
 
 const mapStateToProps = state => ({
   signUp: getSignUp(state),
+  signIn: getSignIn(state),
 });
 
 class SignUp extends Component {
@@ -38,12 +40,16 @@ class SignUp extends Component {
 
     const { signUpRequest } = this.props;
 
-    signUpRequest();
+    signUpRequest(this.state);
   }
 
   render() {
-    const { signUp: { isLoading } } = this.props;
+    const { signUp: { isLoading }, signIn: { isAuthenticated } } = this.props;
     const { email, name, surname, password } = this.state;
+
+    if (isAuthenticated) {
+      return <Redirect to="/map" />;
+    }
 
     return (
       <AuthPage>
@@ -123,6 +129,9 @@ SignUp.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     token: PropTypes.string,
   }).isRequired,
+  signIn: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+  }),
   history: PropTypes.object.isRequired,
   signUpRequest: PropTypes.func.isRequired,
 };

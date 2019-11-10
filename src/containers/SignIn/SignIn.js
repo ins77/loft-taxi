@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Typography, Box, TextField, Button, Link } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -15,15 +15,6 @@ class SignIn extends Component {
   state = {
     email: '',
     password: '',
-  }
-
-  componentDidUpdate(prevProps) {
-    const { signIn: { isAuthenticated, token }, history } = this.props;
-    const hasNewToken = token !== prevProps.signIn.token;
-    
-    if (isAuthenticated && hasNewToken) {
-      history.push('/map');
-    }
   }
 
   handleInputChange = event => {
@@ -41,8 +32,12 @@ class SignIn extends Component {
   }
 
   render() {
-    const { signIn: { isLoading } } = this.props;
+    const { signIn: { isLoading, isAuthenticated  } } = this.props;
     const { email, password } = this.state;
+
+    if (isAuthenticated) {
+      return <Redirect to="/map" />;
+    }
 
     return (
       <AuthPage>

@@ -32,6 +32,4 @@ const withLayout = WrappedComponent => {
   return connect(null, { logout })(LayoutHOC)
 }
 
-
-
 export default withLayout;
