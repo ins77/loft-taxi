@@ -1,8 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
 import { render } from '@testing-library/react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+// import '@testing-library/jest-dom/extend-expect';
 
 import App from './App';
+
+function renderWithRedux(
+  ui,
+  { initialState, store = createStore(reducer, initialState) } = {}
+) {
+  return {
+    ...render(<Provider store={store}>{ui}</Provider>),
+    store,
+  }
+}
 
 describe('App', () => {
   it('renders without crashing', () => {
@@ -12,42 +27,60 @@ describe('App', () => {
   });
 
   describe('роутинг', () => {
-    it('при переходе на /signin открывает страницу', () => {
+    describe('пользователь авторизован', () => {
+      beforeEach(() => {
+        
+      });
 
+      it('при переходе на /signin открывает страницу', () => {
+        const history = createMemoryHistory()
+        const { container, getByText, debug } = render(
+          <Router history={history}>
+            <App />
+          </Router>
+        );
+
+        debug();
+        console.log(container);
+      });
+  
+      it('при переходе на /signup открывает страницу', () => {
+  
+      });
+
+      it('при переходе на /map открывает страницу', () => {
+
+      });
+
+      it('при переходе на /profile открывает страницу', () => {
+
+      });
+
+      it('при переходе на неизвестный роут открывает /map', () => {
+
+      });
     });
 
-    it('при переходе на /signup открывает страницу', () => {
+    describe('пользователь не авторизован', () => {
+      it('при переходе на /signin открывает страницу', () => {
 
-    });
+      });
+  
+      it('при переходе на /signup открывает страницу', () => {
+  
+      });
 
-    describe('переход на /map', () => {
-      it('переходит на /map, если пользователь авторизован', () => {
+      it('при переходе на /map редиректит на /signin', () => {
 
       });
 
-      it('редиректит на /signin, если пользователь не авторизован', () => {
-
-      });
-    });
-
-    describe('переход на /profile', () => {
-      it('переходит на /profile, если пользователь авторизован', () => {
+      it('при переходе на /profile редиректит на /signin', () => {
 
       });
 
-      it('редиректит на /signin, если пользователь не авторизован', () => {
+      it('при переходе на неизвестный роут открывает /signin', () => {
 
       });
     });
-
-    describe('переход неизвестный роут', () => {
-      it('редиректит на /map, если пользователь авторизован', () => {
-
-      });
-
-      it('редиректит на /signin, если пользователь не авторизован', () => {
-
-      });
-    })
   });
 });
