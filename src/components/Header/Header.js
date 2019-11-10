@@ -9,9 +9,6 @@ const useStyles = makeStyles(theme => ({
   button: {
     marginLeft: theme.spacing(2),
   },
-  link: {
-    textDecoration: 'none',
-  },
 }));
 
 const Header = ({ onLogout }) => {
@@ -22,16 +19,12 @@ const Header = ({ onLogout }) => {
       <Toolbar>
         <Logo />
         <Box ml="auto">
-          <NavLink to="/map" className={classes.link}>
-            <Button className={classes.button}>
-              Карта
-            </Button>
-          </NavLink>
-          <NavLink to="/profile" className={classes.link}>
-            <Button className={classes.button}>
-              Профиль
-            </Button>
-          </NavLink>
+          <Button className={classes.button} component={NavLink} to="/map">
+            Карта
+          </Button>
+          <Button className={classes.button} component={NavLink} to="/profile">
+            Профиль
+          </Button>
           <Button className={classes.button}
                   data-testid="button-logout"
                   onClick={onLogout}>
