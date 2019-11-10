@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import withLayout from '../../hoc/withLayout/withLayout';
 import { sendCardRequest } from '../../redux/userCard';
@@ -148,5 +149,14 @@ class ProfilePage extends Component {
     );
   }
 }
+
+ProfilePage.propTypes = {
+  classes: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    paper: PropTypes.string.isRequired,
+  }).isRequired,
+  createUserCardData: PropTypes.func.isRequired,
+  sendCardRequest: PropTypes.func.isRequired,
+};
 
 export default connect(null, { sendCardRequest, createUserCardData })(withStyles(styles)(withLayout(ProfilePage)));

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
@@ -34,6 +35,10 @@ const Header = ({ onLogout }) => {
       </Toolbar>
     </AppBar>
   );
+};
+
+Header.propTypes = {
+  onLogout: PropTypes.func.isRequired,
 };
 
 export default Header;

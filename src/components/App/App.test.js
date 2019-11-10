@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
+
 import App from './App';
 
 describe('App', () => {
@@ -10,12 +12,8 @@ describe('App', () => {
   });
 
   describe('роутинг', () => {
-    beforeEach(() => {
-
-    });
-
     it('при переходе на /signin открывает страницу', () => {
-      
+
     });
 
     it('при переходе на /signup открывает страницу', () => {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
 import { logout } from '../../redux/signIn';
@@ -25,7 +26,13 @@ const withLayout = WrappedComponent => {
     }
   }
 
+  LayoutHOC.propTypes = {
+    logout: PropTypes.func.isRequired,
+  };
+
   return connect(null, { logout })(LayoutHOC)
 }
+
+
 
 export default withLayout;

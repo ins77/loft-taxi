@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { getSignIn } from '../../redux/signIn';
 
 const mapStateToProps = state => ({
@@ -19,5 +21,14 @@ const PrivateRoute = (props) => {
            )} />
   );
 }
+
+PrivateRoute.propTypes = {
+  signIn: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+  }).isRequired,
+  component: PropTypes.object.isRequired,
+  path: PropTypes.string.isRequired,
+};
+
  
 export default connect(mapStateToProps)(PrivateRoute);

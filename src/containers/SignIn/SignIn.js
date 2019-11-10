@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Typography, Box, TextField, Button, Link } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { signInRequest, getSignIn } from '../../redux/signIn';
 import { createSignInData } from '../../redux/signInForm';
@@ -88,5 +89,16 @@ class SignIn extends Component {
     );
   }
 }
+
+SignIn.propTypes = {
+  signIn: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    token: PropTypes.string,
+  }).isRequired,
+  history: PropTypes.object.isRequired,
+  createSignInData: PropTypes.func.isRequired,
+  signInRequest: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, { signInRequest, createSignInData })(SignIn);
