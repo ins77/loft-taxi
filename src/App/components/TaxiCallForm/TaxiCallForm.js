@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Grid, TextField, Paper, Box, Button } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
+import { connect } from 'react-redux';
+import { fetchRouteRequest } from '../../store/mapRoute';
 
 const TaxiCallForm = props => {
   const [addressFrom, setAddressFrom] = useState('');
@@ -8,8 +10,13 @@ const TaxiCallForm = props => {
   const {
     addresses,
     isLoading,
-    onSubmit,
   } = props;
+
+  const onSubmit = event => {
+    event.preventDefault();
+
+    props.fetchRouteRequest({ address1: addressFrom, address2: addressTo });
+  }
 
   return (
     <Box position="relative">
@@ -58,4 +65,4 @@ const TaxiCallForm = props => {
   );
 };
  
-export default TaxiCallForm;
+export default connect(null, { fetchRouteRequest })(TaxiCallForm);

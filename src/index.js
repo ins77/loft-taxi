@@ -7,14 +7,14 @@ import { MuiThemeProvider } from '@material-ui/core';
 import './index.scss';
 import App from './App/App';
 import { signInCheck } from './App/store/signIn';
-import { theme } from './core/utils';
+import muiTheme from './core/utils/muiTheme';
 import store from './core/store';
 
 store.dispatch(signInCheck());
 
 ReactDOM.render(
   <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={muiTheme}>
       <BrowserRouter>
         <App /> 
       </BrowserRouter>

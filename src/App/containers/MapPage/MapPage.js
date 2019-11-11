@@ -5,6 +5,7 @@ import Map from '../../components/Map';
 import withLayout from '../../hoc/withLayout/withLayout';
 import TaxiCallForm from '../../components/TaxiCallForm';
 import { fetchAddressListRequest, getAddressList } from '../../store/addressList';
+import { getMapRoute } from '../../store/mapRoute';
 
 const mapDispatchToProps = state => ({
   addressList: getAddressList(state),
@@ -13,10 +14,6 @@ const mapDispatchToProps = state => ({
 class MapPage extends Component {
   componentDidMount() {
     this.props.fetchAddressListRequest();
-  }
-
-  onSubmit = event => {
-    event.preventDefault();
   }
 
   render() {
@@ -28,7 +25,6 @@ class MapPage extends Component {
         <TaxiCallForm
           addresses={addresses}
           isLoading={isLoading}
-          onSubmit={this.onSubmit}
         />
       </div>
     );

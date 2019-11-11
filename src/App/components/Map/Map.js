@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
+import { connect } from 'react-redux';
+
+import { getMapRoute } from '../../store/mapRoute/selectors';
+import { drawRoute } from '../../../core/utils/drawRoute';
+
+const mapDispatchToProps = state => ({
+  mapRoute: getMapRoute(state),
+});
 
 class Map extends Component {
   mapContainer;
   map;
+
+  componentDidUpdate() {
+    const { mapRoute: { coords } } = this.props;
+
+    drawRoute(this.map, coords);
+  }
 
   componentDidMount() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiaW5zNzciLCJhIjoiY2syMWpjMzhkMDExcTNtbXJ6MHBhemtlNCJ9.ABDFC7l53foY7ZvQimttaQ';
@@ -34,4 +48,4 @@ class Map extends Component {
   }
 }
 
-export default Map;
+export default connect(mapDispatchToProps)(Map);

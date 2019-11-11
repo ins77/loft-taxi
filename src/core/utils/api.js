@@ -22,3 +22,8 @@ export const fetchAddressList = async () => {
   const { data } = await axios.get(`${BASE_URL}/addressList`);
   return data;
 };
+
+export const fetchRoute = async (address1, address2) => {
+  const { data } = await axios.get(`${BASE_URL}/route?address1=${address1}&address2=${address2}`);
+  return data;
+};
