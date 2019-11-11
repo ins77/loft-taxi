@@ -9,8 +9,15 @@ import App from './App/App';
 import { signInCheck } from './App/store/signIn';
 import muiTheme from './core/utils/muiTheme';
 import store from './core/store';
+import { fetchCardRequest } from './App/store/profile';
+
+const token = localStorage.getItem('token');
 
 store.dispatch(signInCheck());
+
+if (token) {
+  store.dispatch(fetchCardRequest(token));
+}
 
 ReactDOM.render(
   <Provider store={store}>

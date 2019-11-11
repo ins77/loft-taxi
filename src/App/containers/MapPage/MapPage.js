@@ -5,7 +5,6 @@ import Map from '../../components/Map';
 import withLayout from '../../hoc/withLayout/withLayout';
 import TaxiCallForm from '../../components/TaxiCallForm';
 import { fetchAddressListRequest, getAddressList } from '../../store/addressList';
-import { getMapRoute } from '../../store/mapRoute';
 
 const mapDispatchToProps = state => ({
   addressList: getAddressList(state),

@@ -7,9 +7,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import withLayout from '../../hoc/withLayout/withLayout';
-import { createCardRequest } from '../../store/userCard';
-import { getSignIn } from '../../store/signIn/selectors';
-import { getUserCard } from '../../store/userCard/selectors';
+import { createCardRequest, getProfile } from '../../store/profile';
+import { getSignIn } from '../../store/signIn';
 
 const styles = {
   text: {
@@ -24,7 +23,7 @@ const styles = {
 
 const mapStateToProps = state => ({
   signIn: getSignIn(state),
-  userCard: getUserCard(state),
+  profile: getProfile(state),
 });
 
 class ProfilePage extends Component {
@@ -33,6 +32,20 @@ class ProfilePage extends Component {
     cardName: '',
     cardNumber: '',
     cvc: '',
+  }
+
+  componentDidMount() {
+    const { profile: { card } } = this.props;
+
+    this.setState(card);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { profile: { card } } = this.props;
+
+    if (card === prevProps.profile.card) return;
+
+    this.setState(card);
   }
 
   handleDateChange = (expiryDate) => {
@@ -61,7 +74,7 @@ class ProfilePage extends Component {
   }
 
   render() {
-    const { classes, userCard: { isLoading } } = this.props;
+    const { classes, profile: { isLoading } } = this.props;
     const { expiryDate, cardNumber, cardName, cvc } = this.state;
 
     return (

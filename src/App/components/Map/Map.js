@@ -14,9 +14,7 @@ class Map extends Component {
   map;
 
   componentDidUpdate() {
-    const { mapRoute: { coords } } = this.props;
-
-    drawRoute(this.map, coords);
+    drawRoute(this.map, this.props.mapRoute.coords);
   }
 
   componentDidMount() {

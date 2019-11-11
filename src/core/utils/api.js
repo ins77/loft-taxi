@@ -13,8 +13,13 @@ export const requestSignUp = async registerData => {
   return data;
 };
 
-export const createUserCard = async cardData => {
+export const createProfile = async cardData => {
   const { data } = await axios.post(`${BASE_URL}/card`, cardData);
+  return data;
+};
+
+export const fetchProfile = async token => {
+  const { data } = await axios.get(`${BASE_URL}/card?token=${token}`);
   return data;
 };
 
