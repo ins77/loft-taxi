@@ -11,21 +11,8 @@ const mapDispatchToProps = state => ({
 });
 
 class MapPage extends Component {
-  state = {
-    addressFrom: '',
-    addressTo: '',
-  }
-
   componentDidMount() {
     this.props.fetchAddressListRequest();
-  }
-
-  onChangeInputFrom = value => {
-    this.setState({ addressFrom: value });
-  }
-
-  onChangeInputTo = value => {
-    this.setState({ addressTo: value });
   }
 
   onSubmit = event => {
@@ -34,7 +21,6 @@ class MapPage extends Component {
 
   render() {
     const { addressList: { addresses, isLoading } } = this.props;
-    const { addressFrom, addressTo } = this.state;
 
     return (
       <div data-testid="map-page">
@@ -42,10 +28,6 @@ class MapPage extends Component {
         <TaxiCallForm
           addresses={addresses}
           isLoading={isLoading}
-          onChangeInputFrom={this.onChangeInputFrom}
-          onChangeInputTo={this.onChangeInputTo}
-          addressFrom={addressFrom}
-          addressTo={addressTo}
           onSubmit={this.onSubmit}
         />
       </div>

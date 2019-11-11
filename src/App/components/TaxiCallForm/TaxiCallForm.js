@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, TextField, Paper, Box, Button } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
 const TaxiCallForm = props => {
+  const [addressFrom, setAddressFrom] = useState('');
+  const [addressTo, setAddressTo] = useState('');
   const {
     addresses,
     isLoading,
-    onChangeInputFrom,
-    onChangeInputTo,
-    addressFrom,
-    addressTo,
     onSubmit,
   } = props;
 
@@ -26,7 +24,7 @@ const TaxiCallForm = props => {
                     options={addresses.filter(address => address !== addressTo)}
                     autoComplete
                     value={addressFrom}
-                    onChange={(event, value) => onChangeInputFrom(value)}
+                    onChange={(event, value) => setAddressFrom(value)}
                     renderInput={params => (
                       <TextField {...params} placeholder="Откуда" margin="normal" fullWidth name="addressFrom" />
                     )}
@@ -38,7 +36,7 @@ const TaxiCallForm = props => {
                       options={addresses.filter(address => address !== addressFrom)}
                       autoComplete
                       value={addressTo}
-                      onChange={(event, value) => onChangeInputTo(value)}
+                      onChange={(event, value) => setAddressTo(value)}
                       renderInput={params => (
                         <TextField {...params} placeholder="Куда" margin="normal" fullWidth name="addressTo" />
                       )}
