@@ -17,3 +17,8 @@ export const createUserCard = async cardData => {
   const { data } = await axios.post(`${BASE_URL}/card`, cardData);
   return data;
 };
+
+export const fetchAddressList = async () => {
+  const { data } = await axios.get(`${BASE_URL}/addressList`);
+  return data;
+};

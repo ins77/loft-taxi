@@ -2,27 +2,29 @@ import { handleActions } from 'redux-actions';
 
 import * as actions from './actions';
 
-const initialState = { isLoading: false, error: null, card: {} };
+const initialState = { isLoading: false, error: null, addresses: [] };
 
 export default handleActions({
-  [actions.createCardRequest](state) {
+  [actions.fetchAddressListRequest](state) {
     return {
       ...state,
+      addresses: [],
       isLoading: true,
       error: null,
     };
   },
-  [actions.createCardSuccess](state, { payload }) {
+  [actions.fetchAddressListSuccess](state, { payload }) {
     return {
       ...state,
-      card: payload,
+      addresses: payload,
       isLoading: false,
       error: null,
     };
   },
-  [actions.createCardFailure](state, { payload }) {
+  [actions.fetchAddressListFailure](state, { payload }) {
     return {
       ...state,
+      addresses: [],
       isLoading: false,
       error: payload,
     };
