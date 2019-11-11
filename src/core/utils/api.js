@@ -7,3 +7,13 @@ export const requestSignIn = async authData => {
   const { data } = await axios.post(`${BASE_URL}/auth`, authData);
   return data;
 };
+
+export const requestSignUp = async registerData => {
+  const { data } = await axios.post(`${BASE_URL}/register`, registerData);
+  return data;
+};
+
+export const createUserCard = async cardData => {
+  const { data } = await axios.post(`${BASE_URL}/card`, cardData);
+  return data;
+};

@@ -5,20 +5,24 @@ import * as actions from './actions';
 const initialState = { isLoading: false, error: null };
 
 export default handleActions({
-  [actions.sendCardRequest](state, { payload }) {
+  [actions.createCardRequest](state) {
     return {
+      ...state,
       isLoading: true,
       error: null,
     };
   },
-  [actions.sendCardSuccess](state, { payload }) {
+  [actions.createCardSuccess](state, { payload }) {
     return {
+      ...state,
+      card: payload,
       isLoading: false,
       error: null,
     };
   },
-  [actions.sendCardFailure](state, { payload }) {
+  [actions.createCardFailure](state, { payload }) {
     return {
+      ...state,
       isLoading: false,
       error: payload,
     };

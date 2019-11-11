@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import withLayout from '../../hoc/withLayout/withLayout';
-import { sendCardRequest } from '../../store/userCard';
+import { createCardRequest } from '../../store/userCard';
 import { getSignIn } from '../../store/signIn/selectors';
 import { getUserCard } from '../../store/userCard/selectors';
 
@@ -55,9 +55,9 @@ class ProfilePage extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const { sendCardRequest, signIn } = this.props;
+    const { createCardRequest, signIn } = this.props;
 
-    sendCardRequest({ ...this.state, token: signIn.token });
+    createCardRequest({ ...this.state, token: signIn.token });
   }
 
   render() {
@@ -160,7 +160,7 @@ ProfilePage.propTypes = {
     text: PropTypes.string.isRequired,
     paper: PropTypes.string.isRequired,
   }).isRequired,
-  sendCardRequest: PropTypes.func.isRequired,
+  createCardRequest: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { sendCardRequest })(withStyles(styles)(withLayout(ProfilePage)));
+export default connect(mapStateToProps, { createCardRequest })(withStyles(styles)(withLayout(ProfilePage)));
