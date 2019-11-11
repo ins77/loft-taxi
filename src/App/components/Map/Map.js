@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { connect } from 'react-redux';
 
-import { getMapRoute } from '../../store/mapRoute/selectors';
+import { getMapRoute } from '../../containers/MapPage/store/mapRoute/selectors';
 import { drawRoute } from '../../../core/utils/drawRoute';
 
 const mapDispatchToProps = state => ({

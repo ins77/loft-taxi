@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
-import { logout } from '../../store/signIn';
+import { logout } from '../../containers/SignIn/store';
 
 const withLayout = WrappedComponent => {
   class LayoutHOC extends Component {

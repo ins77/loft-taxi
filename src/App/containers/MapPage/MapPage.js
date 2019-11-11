@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Map from '../../components/Map';
 import withLayout from '../../hoc/withLayout/withLayout';
 import TaxiCallForm from '../../components/TaxiCallForm';
-import { fetchAddressListRequest, getAddressList } from '../../store/addressList';
+import { fetchAddressListRequest, getAddressList } from './store/addressList';
 
 const mapDispatchToProps = state => ({
   addressList: getAddressList(state),

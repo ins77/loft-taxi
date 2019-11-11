@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getSignIn } from '../../store/signIn';
+import { getSignIn } from '../../containers/SignIn/store';
 
 const mapStateToProps = state => ({
   signIn: getSignIn(state),

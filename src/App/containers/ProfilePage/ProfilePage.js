@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import withLayout from '../../hoc/withLayout/withLayout';
-import { createCardRequest, getProfile } from '../../store/profile';
-import { getSignIn } from '../../store/signIn';
+import { createCardRequest, getProfile } from './store';
+import { getSignIn } from '../SignIn/store';
 
 const styles = {
   text: {

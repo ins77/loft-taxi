@@ -6,10 +6,10 @@ import { MuiThemeProvider } from '@material-ui/core';
 
 import './index.scss';
 import App from './App/App';
-import { signInCheck } from './App/store/signIn';
+import { signInCheck } from './App/containers/SignIn/store';
 import muiTheme from './core/utils/muiTheme';
 import store from './core/store';
-import { fetchCardRequest } from './App/store/profile';
+import { fetchCardRequest } from './App/containers/ProfilePage/store';
 
 const token = localStorage.getItem('token');
 

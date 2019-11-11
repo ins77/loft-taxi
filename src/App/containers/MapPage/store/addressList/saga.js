@@ -2,9 +2,9 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 
 import * as actions from './actions';
 import * as constants from './constants';
-import * as api from '../../../core/utils/api';
+import * as api from '../../../../../core/utils/api';
 
-function* fetchAddressList({ payload }) {
+function* fetchAddressList() {
   try {
     const { addresses } = yield call(api.fetchAddressList);
     yield put(actions.fetchAddressListSuccess(addresses));
