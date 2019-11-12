@@ -17,5 +17,21 @@ function* requestSignIn({ payload }) {
 }
 
 export function* signInSaga() {
-  yield takeLatest(constants.REQUEST, requestSignIn);
+  yield takeLatest(constants.SIGN_IN_REQUEST, requestSignIn);
+}
+
+function* requestSignUp({ payload }) {
+  try {
+    const result = yield call(api.requestSignUp, payload);
+
+    if (!result.success) throw new Error(result.error);
+
+    yield put(actions.signUpSuccess(result.token));
+  } catch ({ message, error }) {
+    yield put(actions.signUpFailure(error || message))
+  }
+}
+
+export function* signUpSaga() {
+  yield takeLatest(constants.SIGN_UP_REQUEST, requestSignUp);
 }

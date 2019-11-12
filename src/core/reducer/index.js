@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
 
-import signIn from '../../App/containers/SignIn/store';
-import signUp from '../../App/containers/SignUp/store';
-import addressList from '../../App/containers/MapPage/store/addressList';
-import mapRoute from '../../App/containers/MapPage/store/mapRoute';
+import auth from '../../App/containers/AuthPage/store';
+import mapRoute from '../../App/containers/MapPage/store';
+import addressList from '../../App/containers/TaxiCallForm/store';
 import profile from '../../App/containers/ProfilePage/store';
 
 const rootReducer = combineReducers({
-  signIn,
-  signUp,
+  auth,
   profile,
   addressList,
   mapRoute,

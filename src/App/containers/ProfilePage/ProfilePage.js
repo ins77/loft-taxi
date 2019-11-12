@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import withLayout from '../../hoc/withLayout/withLayout';
 import { createCardRequest, getProfile } from './store';
-import { getSignIn } from '../SignIn/store';
+import { getSignIn } from '../AuthPage/store';
 
 const styles = {
   text: {

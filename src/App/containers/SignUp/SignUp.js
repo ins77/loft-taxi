@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { getSignUp, signUpRequest } from './store';
-import { getSignIn } from '../SignIn/store';
+import { getSignIn, getSignUp, signUpRequest } from '../AuthPage/store';
 import AuthPage from '../AuthPage';
 
 const mapStateToProps = state => ({

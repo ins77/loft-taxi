@@ -2,7 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 
 import * as actions from './actions';
 import * as constants from './constants';
-import * as api from '../../../../../core/utils/api';
+import * as api from '../../../../core/utils/api';
 
 function* fetchRoute({ payload }) {
   const { address1, address2 } = payload;

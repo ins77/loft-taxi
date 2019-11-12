@@ -6,7 +6,7 @@ import { MuiThemeProvider } from '@material-ui/core';
 
 import './index.scss';
 import App from './App/App';
-import { signInCheck } from './App/containers/SignIn/store';
+import { signInCheck } from './App/containers/AuthPage/store';
 import muiTheme from './core/utils/muiTheme';
 import store from './core/store';
 import { fetchCardRequest } from './App/containers/ProfilePage/store';

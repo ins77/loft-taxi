@@ -1,10 +1,12 @@
 import { handleActions } from 'redux-actions';
+import { combineReducers } from 'redux';
 
 import * as actions from './actions';
 
-const initialState = { isLoading: false , token: null, error: null, isAuthenticated: false };
+const signInInitialState = { isLoading: false , token: null, error: null, isAuthenticated: false };
+const singUpInitialState = { isLoading: false, token: null, error: null };
 
-export default handleActions({
+const signIn = handleActions({
   [actions.signInCheck]() {
     const token = localStorage.getItem('token');
 
@@ -55,4 +57,36 @@ export default handleActions({
       isAuthenticated: false,
     };
   }
-}, initialState);
+}, signInInitialState);
+
+const signUp = handleActions({
+  [actions.signUpRequest](state) {
+    return {
+      ...state,
+      isLoading: true,
+      error: null,
+      token: null,
+    };
+  },
+  [actions.signUpSuccess](state, { payload }) {
+    return {
+      ...state,
+      isLoading: false,
+      error: null,
+      token: payload,
+    };
+  },
+  [actions.signUpFailure](state, { payload }) {
+    return {
+      ...state,
+      isLoading: false,
+      error: payload,
+      token: null,
+    };
+  },
+}, singUpInitialState);
+
+export default combineReducers({
+  signIn,
+  signUp,
+});

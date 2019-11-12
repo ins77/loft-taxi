@@ -1,1 +1,0 @@
-export const getSignUp = state => state.signUp;
