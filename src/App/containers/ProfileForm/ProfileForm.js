@@ -67,17 +67,15 @@ class ProfileForm extends Component {
 
     return (
       <Fragment>
-        <form noValidate onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <Grid container spacing={4}>
             <Grid item xs={6}>
               <Paper>
                 <Box display="flex" justifyContent="space-around" flexDirection="column" width={300} height={190} px={4} py={2}>
                   <TextField 
                     fullWidth
-                    error
                     label="Номер карты"
                     placeholder="0000 0000 0000 0000"
-                    required helperText="Ошибка"
                     name="cardNumber"
                     value={cardNumber}
                     onChange={this.handleCardNumberChange}
@@ -88,9 +86,6 @@ class ProfileForm extends Component {
                     <DatePicker
                       format="MM/yy"
                       label="Срок действия"
-                      error
-                      required
-                      helperText="Ошибка"
                       minDate={new Date("2018-03-01")}
                       maxDate={new Date("2035-06-01")}
                       name="expiryDate"
@@ -106,11 +101,8 @@ class ProfileForm extends Component {
                 <Box display="flex" justifyContent="space-around" flexDirection="column" width={300} height={190} px={4} py={2}>
                   <TextField
                     fullWidth
-                    error
                     label="Имя владельца"
                     placeholder="ИМЯ ВЛАДЕЛЬЦА"
-                    required
-                    helperText="Ошибка"
                     name="cardName"
                     value={cardName}
                     onChange={this.handleInputChange}
@@ -118,11 +110,8 @@ class ProfileForm extends Component {
                   />
                   <TextField
                     fullWidth
-                    error
                     label="CVC"
                     placeholder="000"
-                    required
-                    helperText="Ошибка"
                     name="cvc"
                     value={cvc}
                     onChange={this.handleInputChange}
