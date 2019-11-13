@@ -33,12 +33,8 @@ class SignIn extends Component {
   }
 
   render() {
-    const { signIn: { isLoading, isAuthenticated  } } = this.props;
+    const { signIn: { isLoading  } } = this.props;
     const { email, password } = this.state;
-
-    if (isAuthenticated) {
-      return <Redirect to="/dashboard" />;
-    }
 
     return (
       <AuthPage>
@@ -79,6 +75,7 @@ class SignIn extends Component {
             <Button variant="contained" type="submit">Войти</Button>
           </Box>
         </form>
+
         <Spinner show={isLoading} />
       </AuthPage>
     );

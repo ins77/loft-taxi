@@ -2,9 +2,12 @@ import React from 'react';
 import { Container, Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Logo from '../../components/Logo';
 import PaperBox from '../../components/PaperBox/PaperBox';
+import { getSignIn } from './store';
 
 const styles = {
   grid: {
@@ -12,7 +15,17 @@ const styles = {
   },
 };
 
-const AuthPage = ({ classes, children }) => {
+const mapStateToProps = state => ({
+  signIn: getSignIn(state),
+});
+
+const AuthPage = ({ classes, children, signIn }) => {
+  const { isAuthenticated } = signIn;
+
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <Box display="flex" height="100%">
       <Container maxWidth="md">
@@ -40,4 +53,4 @@ AuthPage.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
-export default withStyles(styles)(AuthPage);
+export default connect(mapStateToProps)(withStyles(styles)(AuthPage));
