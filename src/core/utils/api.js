@@ -1,34 +1,35 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://loft-taxi.glitch.me';
+const axiosInstance = axios.create({
+  baseURL: 'https://loft-taxi.glitch.me',
+});
 
-// TODO: axios instance with BASE_URL
 export const requestSignIn = async authData => {
-  const { data } = await axios.post(`${BASE_URL}/auth`, authData);
+  const { data } = await axiosInstance.post(`/auth`, authData);
   return data;
 };
 
 export const requestSignUp = async registerData => {
-  const { data } = await axios.post(`${BASE_URL}/register`, registerData);
+  const { data } = await axiosInstance.post(`/register`, registerData);
   return data;
 };
 
 export const createProfile = async cardData => {
-  const { data } = await axios.post(`${BASE_URL}/card`, cardData);
+  const { data } = await axiosInstance.post(`/card`, cardData);
   return data;
 };
 
 export const fetchProfile = async token => {
-  const { data } = await axios.get(`${BASE_URL}/card?token=${token}`);
+  const { data } = await axiosInstance.get(`/card?token=${token}`);
   return data;
 };
 
 export const fetchAddressList = async () => {
-  const { data } = await axios.get(`${BASE_URL}/addressList`);
+  const { data } = await axiosInstance.get(`/addressList`);
   return data;
 };
 
 export const fetchRoute = async (address1, address2) => {
-  const { data } = await axios.get(`${BASE_URL}/route?address1=${address1}&address2=${address2}`);
+  const { data } = await axiosInstance.get(`/route?address1=${address1}&address2=${address2}`);
   return data;
 };
