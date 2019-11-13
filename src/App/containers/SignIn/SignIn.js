@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import { signInRequest, getSignIn } from '../AuthPage/store';
 import AuthPage from '../AuthPage';
+import Spinner from '../../components/Spinner';
 
 const mapStateToProps = state => ({
   signIn: getSignIn(state),
@@ -75,9 +76,10 @@ class SignIn extends Component {
             onChange={this.handleInputChange}
           />
           <Box mt={3} display="flex" justifyContent="flex-end">
-            <Button variant="contained" type="submit" disabled={isLoading}>Войти</Button>
+            <Button variant="contained" type="submit">Войти</Button>
           </Box>
         </form>
+        <Spinner show={isLoading} />
       </AuthPage>
     );
   }

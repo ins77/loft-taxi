@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { TextField, Paper, Box, Button } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { connect } from 'react-redux';
+
 import { fetchRouteRequest } from '../MapPage/store';
 import { fetchAddressListRequest, getAddressList } from './store';
+import Spinner from '../../components/Spinner';
 
 const mapStateToProps = state => ({
   addressList: getAddressList(state),
@@ -42,8 +44,8 @@ class TaxiCallForm extends Component {
     return (
       <Box position="relative" width={600} mx={3} my={5}>
         <Paper>
-          <Box px={5} py={3}>
-            <form noValidate onSubmit={this.onSubmit}>
+          <Box px={5} py={3} position="relative" >
+            <form noValidate onSubmit={this.onSubmit} style={{width: '100%'}}>
               <Autocomplete
                 filterSelectedOptions
                 options={addresses.filter(address => address !== addressTo)}
@@ -69,11 +71,12 @@ class TaxiCallForm extends Component {
               </Box>
   
               <Box mt={4}>
-                <Button variant="contained" type="submit" fullWidth disabled={isLoading}>
+                <Button variant="contained" type="submit" fullWidth disabled={!addressFrom || !addressTo}>
                   Вызвать такси
                 </Button>
               </Box>
             </form>
+            <Spinner show={isLoading} />
           </Box>
         </Paper>
       </Box>

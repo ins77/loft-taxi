@@ -7,8 +7,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import withLayout from '../../hoc/withLayout/withLayout';
-import { createCardRequest, getProfile } from './store';
+import { fetchCardRequest, createCardRequest, getProfile } from './store';
 import { getSignIn } from '../AuthPage/store';
+import Spinner from '../../components/Spinner';
 
 const styles = {
   text: {
@@ -27,17 +28,19 @@ const mapStateToProps = state => ({
 });
 
 class ProfilePage extends Component {
-  state = {
-    expiryDate: new Date(),
-    cardName: '',
-    cardNumber: '',
-    cvc: '',
+  constructor(props) {
+    super(props);
+
+    const { profile: { card } } = props;
+    const { expiryDate, cardName, cardNumber, cvc } = card;
+
+    this.state = { expiryDate, cardName, cardNumber, cvc };
   }
 
   componentDidMount() {
-    const { profile: { card } } = this.props;
+    const { signIn: { token }, fetchCardRequest } = this.props;
 
-    this.setState(card);
+    fetchCardRequest(token);
   }
 
   componentDidUpdate(prevProps) {
@@ -81,7 +84,7 @@ class ProfilePage extends Component {
       <div data-testid="profile-page">
         <Box pt={5} display="flex" justifyContent="center">
           <Paper>
-            <Box px={4} py={5} display="flex" flexDirection="column" alignItems="center">
+            <Box px={4} py={5} display="flex" flexDirection="column" alignItems="center" justifyContent="center" width={700} minHeight={473}>
               <Typography variant="h4">
                 Профиль
               </Typography>
@@ -156,10 +159,12 @@ class ProfilePage extends Component {
                     </Grid>
                   </Grid>
                   <Box mt={5} display="flex" justifyContent="center">
-                    <Button variant="contained" type="submit" disabled={isLoading}>Сохранить</Button>
+                    <Button variant="contained" type="submit">Сохранить</Button>
                   </Box>
                 </form>
               </Box>
+
+              <Spinner show={isLoading} />
             </Box>
           </Paper>
         </Box>
@@ -176,4 +181,4 @@ ProfilePage.propTypes = {
   createCardRequest: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { createCardRequest })(withStyles(styles)(withLayout(ProfilePage)));
+export default connect(mapStateToProps, { createCardRequest, fetchCardRequest })(withStyles(styles)(withLayout(ProfilePage)));

@@ -19,6 +19,7 @@ const withLayout = WrappedComponent => {
       return (
         <div data-testid="layout">
           <Header onLogout={this.onLogout} />
+          {/*TODO: загрузить тут адреса и данные профиля*/}
           <WrappedComponent {...this.props} />
         </div>
       );
