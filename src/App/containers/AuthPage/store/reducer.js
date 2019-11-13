@@ -7,7 +7,7 @@ const signInInitialState = { isLoading: false , token: null, error: null, isAuth
 const singUpInitialState = { isLoading: false, error: null, submitted: false };
 
 const signIn = handleActions({
-  [actions.signInCheck]() {
+  [actions.checkSignIn]() {
     const token = localStorage.getItem('token');
 
     return {

@@ -6,11 +6,11 @@ import { MuiThemeProvider } from '@material-ui/core';
 
 import './index.scss';
 import App from './App/App';
-import { signInCheck } from './App/containers/AuthPage/store';
+import { checkSignIn } from './App/containers/AuthPage/store';
 import muiTheme from './core/utils/muiTheme';
 import store from './core/store';
 
-store.dispatch(signInCheck());
+store.dispatch(checkSignIn());
 
 ReactDOM.render(
   <Provider store={store}>

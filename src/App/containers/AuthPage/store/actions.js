@@ -2,7 +2,7 @@ import { createAction } from 'redux-actions';
 
 import * as constants from './constants';
 
-export const signInCheck = createAction(constants.SIGN_IN_CHECK);
+export const checkSignIn = createAction(constants.SIGN_IN_CHECK);
 
 export const logout = createAction(constants.SIGN_IN_LOGOUT);
 
