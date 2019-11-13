@@ -1,5 +1,7 @@
 const STORE_TYPE = 'profile';
 
+export const INIT = `${STORE_TYPE}/INIT`;
+
 export const FETCH_REQUEST = `${STORE_TYPE}/FETCH_REQUEST`;
 export const FETCH_SUCCESS = `${STORE_TYPE}/FETCH_SUCCESS`;
 export const FETCH_FAILURE = `${STORE_TYPE}/FETCH_FAILURE`;

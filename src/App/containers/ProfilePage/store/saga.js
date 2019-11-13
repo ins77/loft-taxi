@@ -6,7 +6,12 @@ import * as api from '../../../../core/utils/api';
 
 function* createProfile({ payload }) {
   try {
-    yield call(api.createProfile, payload);
+    const result = yield call(api.createProfile, payload);
+
+    if (result.error) {
+      throw new Error(result.error);
+    }
+
     const { token, ...card } = payload;
 
     yield put(actions.createCardSuccess(card));
@@ -18,11 +23,16 @@ function* createProfile({ payload }) {
 function* fetchProfile({ payload }) {
   try {
     const result = yield call(api.fetchProfile, payload);
+
+    if (result.error) {
+      throw new Error(result.error);
+    }
+
     const { id, ...card } = result;
 
-    yield put(actions.createCardSuccess(card));
+    yield put(actions.fetchCardSuccess(card));
   } catch ({ message, error }) {
-    yield put(actions.createCardFailure(error || message))
+    yield put(actions.fetchCardFailure(error || message))
   }
 }
 

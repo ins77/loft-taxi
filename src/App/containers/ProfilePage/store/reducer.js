@@ -2,22 +2,31 @@ import { handleActions } from 'redux-actions';
 
 import * as actions from './actions';
 
-const initialState = { isLoading: false, error: null, card: {} };
+const initialState = { isLoading: false, error: null, card: null, submitted: false };
 
- export default handleActions({
+export default handleActions({
+  [actions.initCreateCard](state) {
+    return {
+      ...state,
+      submitted: false,
+    };
+  },
   [actions.createCardRequest](state) {
     return {
       ...state,
       isLoading: true,
       error: null,
+      submitted: false,
     };
   },
   [actions.createCardSuccess](state, { payload }) {
+    console.log(123);
     return {
       ...state,
       card: payload,
       isLoading: false,
       error: null,
+      submitted: true,
     };
   },
   [actions.createCardFailure](state, { payload }) {
@@ -32,6 +41,8 @@ const initialState = { isLoading: false, error: null, card: {} };
       ...state,
       isLoading: true,
       error: null,
+      submitted: false,
+      card: null,
     };
   },
   [actions.fetchCardSuccess](state, { payload }) {

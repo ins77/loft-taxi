@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import Logo from '../Logo';
 
@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = ({ onLogout }) => {
+const Header = ({ onLogout, match }) => {
   const classes = useStyles();
 
   return (
@@ -20,10 +20,10 @@ const Header = ({ onLogout }) => {
       <Toolbar>
         <Logo />
         <Box ml="auto">
-          <Button className={classes.button} component={NavLink} to="/map">
+          <Button className={classes.button} component={NavLink} to={`${match.url}/map`}>
             Карта
           </Button>
-          <Button className={classes.button} component={NavLink} to="/profile">
+          <Button className={classes.button} component={NavLink} to={`${match.url}/profile`}>
             Профиль
           </Button>
           <Button className={classes.button}
@@ -41,5 +41,5 @@ Header.propTypes = {
   onLogout: PropTypes.func.isRequired,
 };
 
-export default Header;
+export default withRouter(Header);
 

@@ -37,7 +37,7 @@ class SignIn extends Component {
     const { email, password } = this.state;
 
     if (isAuthenticated) {
-      return <Redirect to="/map" />;
+      return <Redirect to="/dashboard" />;
     }
 
     return (

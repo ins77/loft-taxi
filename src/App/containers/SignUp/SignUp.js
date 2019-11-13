@@ -48,7 +48,7 @@ class SignUp extends Component {
     const { email, name, surname, password } = this.state;
 
     if (isAuthenticated) {
-      return <Redirect to="/map" />;
+      return <Redirect to="/dashboard" />;
     }
 
     return (

@@ -1,9 +1,10 @@
 import React from 'react';
-import { Container, Grid, Box, Paper } from '@material-ui/core';
+import { Container, Grid, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
 import Logo from '../../components/Logo';
+import PaperBox from '../../components/PaperBox/PaperBox';
 
 const styles = {
   grid: {
@@ -11,7 +12,7 @@ const styles = {
   },
 };
 
-const AuthPage = ({ classes, children, auth }) => {
+const AuthPage = ({ classes, children }) => {
   return (
     <Box display="flex" height="100%">
       <Container maxWidth="md">
@@ -22,11 +23,9 @@ const AuthPage = ({ classes, children, auth }) => {
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Paper>
-              <Box px={4} py={5} position="relative">
-                {children}
-              </Box>
-            </Paper>
+            <PaperBox width={500}>
+              {children}
+            </PaperBox>
           </Grid>
         </Grid>
       </Container>
