@@ -36,7 +36,7 @@ class SignIn extends Component {
         </Box>
         <Formik 
           initialValues={{ email: '', password: '' }}
-          onSubmit={this.handleSignInSubmit}
+          onSubmit={this.handleSubmit}
           validationSchema={Yup.object({
             email: Yup.string()
               .email('Введите корректный email')
