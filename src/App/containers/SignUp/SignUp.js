@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 import { getSignUp, signUpRequest } from '../AuthPage/store';
 import AuthPage from '../AuthPage';
-import Spinner from '../../components/Spinner';
 
 const mapStateToProps = state => ({
   signUp: getSignUp(state),
@@ -43,7 +42,6 @@ class SignUp extends Component {
   }
 
   render() {
-    const { signUp: { isLoading } } = this.props;
     const { email, name, surname, password } = this.state;
 
     return (
@@ -111,10 +109,9 @@ class SignUp extends Component {
             onChange={this.handleInputChange}
           />
           <Box mt={3} display="flex" justifyContent="flex-end">
-            <Button variant="contained" type="submit" disabled={isLoading}>Зарегистрироваться</Button>
+            <Button variant="contained" type="submit">Зарегистрироваться</Button>
           </Box>
         </form>
-        <Spinner show={isLoading} />
       </AuthPage>
     );
   }

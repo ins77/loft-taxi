@@ -1,40 +1,27 @@
 import React, { Component } from 'react';
-import { Typography, Box, TextField, Button, Link } from '@material-ui/core';
-import { Link as RouterLink, Redirect } from 'react-router-dom';
+import { Typography, Box, Button, Link } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 
-import { signInRequest, getSignIn } from '../AuthPage/store';
+import { signInRequest } from '../AuthPage/store';
 import AuthPage from '../AuthPage';
-import Spinner from '../../components/Spinner';
+import TextInput from '../../components/TextInput';
+import { getSignIn } from '../AuthPage/store';
 
 const mapStateToProps = state => ({
   signIn: getSignIn(state),
 });
 
 class SignIn extends Component {
-  state = {
-    email: '',
-    password: '',
-  }
-
-  handleInputChange = event => {
-    const { name, value } = event.target;
-
-    this.setState({ [name]: value });
-  }
-
-  onSignInSubmit = event => {
-    event.preventDefault();
-
-    const { signInRequest } = this.props;
-
-    signInRequest(this.state);
+  handleSubmit = values => {
+    this.props.signInRequest(values);
   }
 
   render() {
-    const { signIn: { isLoading  } } = this.props;
-    const { email, password } = this.state;
+    const { signIn: { error } } = this.props;
 
     return (
       <AuthPage>
@@ -47,47 +34,41 @@ class SignIn extends Component {
             </Link>
           </Typography>
         </Box>
-        <form noValidate onSubmit={this.onSignInSubmit} data-testid="signin-form">
-          <TextField
-            name="email"
-            fullWidth
-            error
-            margin="normal"
-            label="Email"
-            required
-            helperText="Ошибка"
-            value={email}
-            onChange={this.handleInputChange}
-          />
-          <TextField
-            name="password"
-            fullWidth
-            error
-            margin="normal"
-            label="Пароль"
-            required
-            helperText="Ошибка"
-            type="password"
-            value={password}
-            onChange={this.handleInputChange}
-          />
-          <Box mt={3} display="flex" justifyContent="flex-end">
-            <Button variant="contained" type="submit">Войти</Button>
-          </Box>
-        </form>
-
-        <Spinner show={isLoading} />
+        <Formik 
+          initialValues={{ email: '', password: '' }}
+          onSubmit={this.handleSubmit}
+          validationSchema={Yup.object({
+            email: Yup.string()
+              .email('Введите корректный email')
+              .required('Поле обязательное для заполнения'),
+          })}>
+          <Form data-testid="signin-form">
+            <TextInput
+              name="email"
+              margin="normal"
+              label="Email"
+              fullWidth
+              errorMessage={error}
+            />
+            <TextInput
+              name="password"
+              margin="normal"
+              label="Пароль"
+              type="password"
+              fullWidth
+              errorMessage={error}
+            />
+            <Box mt={3} display="flex" justifyContent="flex-end">
+              <Button variant="contained" type="submit">Войти</Button>
+            </Box>
+          </Form>
+        </Formik>
       </AuthPage>
     );
   }
 }
 
 SignIn.propTypes = {
-  signIn: PropTypes.shape({
-    isAuthenticated: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    token: PropTypes.string,
-  }).isRequired,
   history: PropTypes.object.isRequired,
   signInRequest: PropTypes.func.isRequired,
 };
