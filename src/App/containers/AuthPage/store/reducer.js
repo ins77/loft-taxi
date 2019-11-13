@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import * as actions from './actions';
 
 const signInInitialState = { isLoading: false , token: null, error: null, isAuthenticated: false };
-const singUpInitialState = { isLoading: false, token: null, error: null };
+const singUpInitialState = { isLoading: false, error: null, submitted: false };
 
 const signIn = handleActions({
   [actions.signInCheck]() {
@@ -60,20 +60,26 @@ const signIn = handleActions({
 }, signInInitialState);
 
 const signUp = handleActions({
+  [actions.initSignUp](state) {
+    return {
+      ...state,
+      submitted: false,
+    }
+  },
   [actions.signUpRequest](state) {
     return {
       ...state,
       isLoading: true,
       error: null,
-      token: null,
+      submitted: false,
     };
   },
-  [actions.signUpSuccess](state, { payload }) {
+  [actions.signUpSuccess](state) {
     return {
       ...state,
       isLoading: false,
       error: null,
-      token: payload,
+      submitted: true,
     };
   },
   [actions.signUpFailure](state, { payload }) {
@@ -81,7 +87,7 @@ const signUp = handleActions({
       ...state,
       isLoading: false,
       error: payload,
-      token: null,
+      submitted: false,
     };
   },
 }, singUpInitialState);

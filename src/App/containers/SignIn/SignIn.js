@@ -36,10 +36,13 @@ class SignIn extends Component {
         </Box>
         <Formik 
           initialValues={{ email: '', password: '' }}
-          onSubmit={this.handleSubmit}
+          onSubmit={this.handleSignInSubmit}
           validationSchema={Yup.object({
             email: Yup.string()
               .email('Введите корректный email')
+              .required('Поле обязательное для заполнения'),
+            password: Yup.string()
+              .min(6, 'Пароль должен состоять минимум из 6 символов')
               .required('Поле обязательное для заполнения'),
           })}>
           <Form data-testid="signin-form">
