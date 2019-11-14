@@ -4,30 +4,39 @@ import { Typography, Button, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 import AddressesForm from '../../components/AddressesForm';
-import Map from '../../components/Map';
+import Map from '../Map';
 import PaperBox from '../../shared/PaperBox';
 import Spinner from '../../shared/Spinner';
 import { getProfile } from '../ProfilePage/store';
-import { getAddresses, fetchRoutesRequest } from './store';
+import { getAddresses, fetchRoutesRequest, initMap, getRoutes } from './store';
 
 const mapStateToProps = state => ({
   profile: getProfile(state),
   addresses: getAddresses(state),
+  routes: getRoutes(state),
 });
 
 class MapPage extends Component {
+  componentDidMount() {
+    this.props.initMap();
+  }
+
   handleSubmitAddresses = values => {
     const { addressFrom, addressTo } = values;
 
     this.props.fetchRoutesRequest({ addressFrom, addressTo });
   }
-ß
+
+  orderAgain = () => {
+    this.props.initMap();
+  }
+
   render() {
-    const { profile, addresses: addressesList } = this.props;
+    const { profile, addresses: addressesList, routes: { submitted } } = this.props;
     const { card, isLoading: isProfileLoading } = profile;
     const { addresses, isLoading: isAddressesLoading } = addressesList;
-    const isFormShown = !!card || isProfileLoading;
-    const isMessageShown = !card && !isProfileLoading;
+    const isFormShown = !submitted && (!!card || isProfileLoading);
+    const isProfileMessageShown = !card && !isProfileLoading && !submitted;
 
     return (
       <div data-testid="map-page">
@@ -40,7 +49,7 @@ class MapPage extends Component {
             />
           )}
 
-          {isMessageShown && (
+          {isProfileMessageShown && (
             <Fragment>
               <Box mb={4}>
                 <Typography variant="h4">
@@ -58,6 +67,19 @@ class MapPage extends Component {
             </Fragment>
           )}
 
+          {submitted && (
+            <Fragment>
+              <Box mb={4}>
+                <Typography variant="h4">
+                  Спасибо за заказ, такси скоро приедет!
+                </Typography>
+              </Box>
+              <Button variant="contained" fullWidth onClick={this.orderAgain}>
+                Заказать снова
+              </Button>
+            </Fragment>
+          )}
+
           <Spinner show={isProfileLoading || isAddressesLoading} />
         </PaperBox>
       </div>
@@ -65,4 +87,4 @@ class MapPage extends Component {
   }
 }
 
-export default connect(mapStateToProps, { fetchRoutesRequest })(MapPage);
+export default connect(mapStateToProps, { fetchRoutesRequest, initMap })(MapPage);

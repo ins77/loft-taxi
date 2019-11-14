@@ -2,8 +2,8 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import PrivateRoute from './shared/PrivateRoute';
-import SignIn from './containers/SignIn';
-import SignUp from './containers/SignUp';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 import Dashboard from './containers/Dashboard';
 
 const App = () => (

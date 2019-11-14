@@ -3,16 +3,23 @@ import { combineReducers } from 'redux';
 
 import * as actions from './actions';
 
-const routesInitialState = { isLoading: false, error: null, coords: [] };
+const routesInitialState = { isLoading: false, submitted: false, error: null, coords: [] };
 const addressesInitialState = { isLoading: false, error: null, addresses: [] };
 
 const routes = handleActions({
+  [actions.initMap](state) {
+    return {
+      ...state,
+      submitted: false,
+    }
+  },
   [actions.fetchRoutesRequest](state) {
     return {
       ...state,
       coords: [],
       isLoading: true,
       error: null,
+      submitted: false,
     };
   },
   [actions.fetchRoutesSuccess](state, { payload }) {
@@ -21,6 +28,7 @@ const routes = handleActions({
       coords: payload,
       isLoading: false,
       error: null,
+      submitted: true,
     };
   },
   [actions.fetchRoutesFailure](state, { payload }) {
@@ -29,6 +37,7 @@ const routes = handleActions({
       coords: [],
       isLoading: false,
       error: payload,
+      submitted: false,
     };
   },
 }, routesInitialState);

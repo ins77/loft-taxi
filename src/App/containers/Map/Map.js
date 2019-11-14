@@ -6,16 +6,12 @@ import { getRoutes } from '../../containers/MapPage/store';
 import { drawRoute } from '../../../core/utils/drawRoute';
 
 const mapDispatchToProps = state => ({
-  mapRoute: getRoutes(state),
+  routes: getRoutes(state),
 });
 
 class Map extends Component {
   mapContainer;
   map;
-
-  componentDidUpdate() {
-    drawRoute(this.map, this.props.mapRoute.coords);
-  }
 
   componentDidMount() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiaW5zNzciLCJhIjoiY2syMWpjMzhkMDExcTNtbXJ6MHBhemtlNCJ9.ABDFC7l53foY7ZvQimttaQ';
@@ -26,6 +22,14 @@ class Map extends Component {
       center: [30.2656504, 59.8029126],
       zoom: 15,
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { routes: { coords } } = this.props;
+
+    if (prevProps.routes.coords !== coords) {
+      drawRoute(this.map, coords);
+    }
   }
 
   componentWillUnmount() {
