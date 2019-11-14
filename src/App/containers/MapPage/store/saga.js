@@ -5,10 +5,10 @@ import * as constants from './constants';
 import * as api from '../../../../core/utils/api';
 
 function* fetchRoutes({ payload }) {
-  const { address1, address2 } = payload;
+  const { addressFrom, addressTo } = payload;
 
   try {
-    const result = yield call(api.fetchRoutes, address1, address2);
+    const result = yield call(api.fetchRoutes, addressFrom, addressTo);
     yield put(actions.fetchRoutesSuccess(result));
   } catch ({ message, error }) {
     yield put(actions.fetchRoutesFailure(error || message))

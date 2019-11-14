@@ -7,8 +7,8 @@ import { Redirect } from 'react-router-dom';
 
 import Logo from '../../shared/Logo';
 import PaperBox from '../../shared/PaperBox/PaperBox';
-import { getSignIn, getSignUp, signInRequest, signUpRequest, initSignUp } from './store';
 import Spinner from '../../shared/Spinner';
+import { getSignIn, getSignUp, signInRequest, signUpRequest, initSignUp } from './store';
 
 const styles = {
   grid: {

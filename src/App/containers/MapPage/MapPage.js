@@ -3,27 +3,42 @@ import { connect } from 'react-redux';
 import { Typography, Button, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
+import AddressesForm from '../../components/AddressesForm';
 import Map from '../../components/Map';
-import AddressesForm from '../AddressesForm';
 import PaperBox from '../../shared/PaperBox';
-import { getProfile } from '../ProfilePage/store';
 import Spinner from '../../shared/Spinner';
+import { getProfile } from '../ProfilePage/store';
+import { getAddresses, fetchRoutesRequest } from './store';
 
 const mapStateToProps = state => ({
   profile: getProfile(state),
+  addresses: getAddresses(state),
 });
 
 class MapPage extends Component {
+  handleSubmitAddresses = values => {
+    const { addressFrom, addressTo } = values;
+
+    this.props.fetchRoutesRequest({ addressFrom, addressTo });
+  }
+ß
   render() {
-    const { profile: { card, isLoading } } = this.props;
-    const isFormShown = !!card || isLoading;
-    const isMessageShown = !card && !isLoading;
+    const { profile, addresses: addressesList } = this.props;
+    const { card, isLoading: isProfileLoading } = profile;
+    const { addresses, isLoading: isAddressesLoading } = addressesList;
+    const isFormShown = !!card || isProfileLoading;
+    const isMessageShown = !card && !isProfileLoading;
 
     return (
       <div data-testid="map-page">
         <Map />
         <PaperBox width={650}>
-          {isFormShown && <AddressesForm/>}
+          {isFormShown && (
+            <AddressesForm
+              addresses={addresses}
+              handleSubmitAddresses={this.handleSubmitAddresses}
+            />
+          )}
 
           {isMessageShown && (
             <Fragment>
@@ -43,11 +58,11 @@ class MapPage extends Component {
             </Fragment>
           )}
 
-          <Spinner show={isLoading} />
+          <Spinner show={isProfileLoading || isAddressesLoading} />
         </PaperBox>
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps)(MapPage);
+export default connect(mapStateToProps, { fetchRoutesRequest })(MapPage);
