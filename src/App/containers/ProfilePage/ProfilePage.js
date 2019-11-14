@@ -31,7 +31,7 @@ class ProfilePage extends Component {
     return (
       <div data-testid="profile-page">
         <Box display="flex" justifyContent="center">
-          <PaperBox display="flex" flexDirection="column" alignItems="center">
+          <PaperBox display="flex" flexDirection="column" alignItems="center" isLoading={isLoading}>
             <Typography variant="h4">
               Профиль
             </Typography>
@@ -51,8 +51,6 @@ class ProfilePage extends Component {
                   <Button variant="contained" to="/dashboard/map" component={Link}>Перейти на карту</Button>
                 </Box>
               )}
-
-              <Spinner show={isLoading} />
             </Box>
           </PaperBox>
         </Box>

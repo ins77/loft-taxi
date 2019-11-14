@@ -58,7 +58,7 @@ const withAuthLayout = WrappedComponent => {
                 </Box>
               </Grid>
               <Grid item xs={6}>
-                <PaperBox width={500}>
+                <PaperBox width={500} isLoading={signInIsLoading || signUpIsLoading}>
                   <WrappedComponent 
                     handleSubmitSignIn={this.handleSubmitSignIn}
                     handleSubmitSignUp={this.handleSubmitSignUp}
@@ -66,8 +66,6 @@ const withAuthLayout = WrappedComponent => {
                     signUpError={signUpError}
                     isSignUpSubmitted={submitted}
                   />
-
-                  <Spinner show={signInIsLoading || signUpIsLoading} />
                 </PaperBox>
               </Grid>
             </Grid>

@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import AddressesForm from '../../components/AddressesForm';
 import Map from '../Map';
 import PaperBox from '../../shared/PaperBox';
-import Spinner from '../../shared/Spinner';
 import { getProfile } from '../ProfilePage/store';
 import { getAddresses, fetchRoutesRequest, initMap, getRoutes } from './store';
 
@@ -41,7 +40,7 @@ class MapPage extends Component {
     return (
       <div data-testid="map-page">
         <Map />
-        <PaperBox width={650}>
+        <PaperBox width={650} isLoading={isProfileLoading || isAddressesLoading}>
           {isFormShown && (
             <AddressesForm
               addresses={addresses}
@@ -79,8 +78,6 @@ class MapPage extends Component {
               </Button>
             </Fragment>
           )}
-
-          <Spinner show={isProfileLoading || isAddressesLoading} />
         </PaperBox>
       </div>
     );
