@@ -7,7 +7,6 @@ import PaperBox from '../../shared/PaperBox/PaperBox';
 import ProfileForm from '../../components/ProfileForm';
 import { initCreateCard, createCardRequest, getProfile } from './store';
 import { getSignIn } from '../withAuthLayout/store';
-import Spinner from '../../shared/Spinner';
 
 const mapStateToProps = state => ({
   profile: getProfile(state),
