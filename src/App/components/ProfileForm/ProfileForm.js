@@ -3,8 +3,8 @@ import { Paper, Box, Grid, Button } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-import FormikDatePicker from '../FormikDatePicker';
-import FormikInput from '../FormikInput';
+import FormikDatePicker from '../../shared/FormikDatePicker';
+import FormikInput from '../../shared/FormikInput';
 
 const ProfileForm = ({ card, handleSubmitProfile }) => {
   const values = { expiryDate: new Date(), cardNumber: '', cardName: '', cvc: '' };

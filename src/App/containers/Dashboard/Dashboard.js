@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Header from '../../components/Header';
-import { logout, getSignIn } from '../AuthPage/store';
+import { logout, getSignIn } from '../withAuthLayout/store';
 import MapPage from '../MapPage';
 import ProfilePage from '../ProfilePage';
 import { fetchCardRequest } from '../ProfilePage/store';
-import { fetchAddressListRequest } from '../AddressesForm/store';
+import { fetchAddressesRequest } from '../MapPage/store';
 
 const mapStateToProps = state => ({
   signIn: getSignIn(state),
@@ -16,10 +16,10 @@ const mapStateToProps = state => ({
 
 class Dashboard extends Component {
   componentDidMount() {
-    const { signIn: { token }, fetchCardRequest, fetchAddressListRequest } = this.props;
+    const { signIn: { token }, fetchCardRequest, fetchAddressesRequest } = this.props;
 
     fetchCardRequest(token);
-    fetchAddressListRequest();
+    fetchAddressesRequest();
   }
 
   onLogout = event => {
@@ -49,4 +49,4 @@ Dashboard.propTypes = {
   logout: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { logout, fetchCardRequest, fetchAddressListRequest })(Dashboard);
+export default connect(mapStateToProps, { logout, fetchCardRequest, fetchAddressesRequest })(Dashboard);

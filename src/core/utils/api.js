@@ -24,12 +24,12 @@ export const fetchProfile = async token => {
   return data;
 };
 
-export const fetchAddressList = async () => {
+export const fetchAddresses = async () => {
   const { data } = await axiosInstance.get(`/addressList`);
   return data;
 };
 
-export const fetchRoute = async (address1, address2) => {
+export const fetchRoutes = async (address1, address2) => {
   const { data } = await axiosInstance.get(`/route?address1=${address1}&address2=${address2}`);
   return data;
 };

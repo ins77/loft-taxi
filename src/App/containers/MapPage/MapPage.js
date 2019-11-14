@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 import Map from '../../components/Map';
 import AddressesForm from '../AddressesForm';
-import PaperBox from '../../components/PaperBox';
+import PaperBox from '../../shared/PaperBox';
 import { getProfile } from '../ProfilePage/store';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../shared/Spinner';
 
 const mapStateToProps = state => ({
   profile: getProfile(state),

@@ -3,12 +3,11 @@ import { TextField, Box, Button } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { connect } from 'react-redux';
 
-import { fetchRouteRequest } from '../MapPage/store';
-import { fetchAddressListRequest, getAddressList } from './store';
-import Spinner from '../../components/Spinner';
+import { fetchRoutesRequest, fetchAddressesRequest, getAddresses } from '../MapPage/store';
+import Spinner from '../../shared/Spinner';
 
 const mapStateToProps = state => ({
-  addressList: getAddressList(state),
+  addresses: getAddresses(state),
 });
 
 class AddressesForm extends Component {
@@ -30,11 +29,11 @@ class AddressesForm extends Component {
 
     const { addressFrom, addressTo } = this.state;
 
-    this.props.fetchRouteRequest({ address1: addressFrom, address2: addressTo });
+    this.props.fetchRoutesRequest({ address1: addressFrom, address2: addressTo });
   }
 
   render() {
-    const { addressList: { addresses, isLoading } } = this.props;
+    const { addresses: { addresses, isLoading } } = this.props;
     const { addressFrom, addressTo } = this.state;
 
     return (
@@ -77,4 +76,4 @@ class AddressesForm extends Component {
   }
 };
  
-export default connect(mapStateToProps, { fetchRouteRequest, fetchAddressListRequest })(AddressesForm);
+export default connect(mapStateToProps, { fetchRoutesRequest, fetchAddressesRequest })(AddressesForm);

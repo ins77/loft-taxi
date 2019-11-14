@@ -3,11 +3,11 @@ import { Box, Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import PaperBox from '../../components/PaperBox/PaperBox';
+import PaperBox from '../../shared/PaperBox/PaperBox';
 import ProfileForm from '../../components/ProfileForm';
 import { initCreateCard, createCardRequest, getProfile } from './store';
-import { getSignIn } from '../AuthPage/store';
-import Spinner from '../../components/Spinner';
+import { getSignIn } from '../withAuthLayout/store';
+import Spinner from '../../shared/Spinner';
 
 const mapStateToProps = state => ({
   profile: getProfile(state),

@@ -1,11 +1,13 @@
 import { handleActions } from 'redux-actions';
+import { combineReducers } from 'redux';
 
 import * as actions from './actions';
 
-const initialState = { isLoading: false, error: null, coords: [] };
+const routesInitialState = { isLoading: false, error: null, coords: [] };
+const addressesInitialState = { isLoading: false, error: null, addresses: [] };
 
-export default handleActions({
-  [actions.fetchRouteRequest](state) {
+const routes = handleActions({
+  [actions.fetchRoutesRequest](state) {
     return {
       ...state,
       coords: [],
@@ -13,7 +15,7 @@ export default handleActions({
       error: null,
     };
   },
-  [actions.fetchRouteSuccess](state, { payload }) {
+  [actions.fetchRoutesSuccess](state, { payload }) {
     return {
       ...state,
       coords: payload,
@@ -21,7 +23,7 @@ export default handleActions({
       error: null,
     };
   },
-  [actions.fetchRouteFailure](state, { payload }) {
+  [actions.fetchRoutesFailure](state, { payload }) {
     return {
       ...state,
       coords: [],
@@ -29,4 +31,36 @@ export default handleActions({
       error: payload,
     };
   },
-}, initialState);
+}, routesInitialState);
+
+const addresses = handleActions({
+  [actions.fetchAddressesRequest](state) {
+    return {
+      ...state,
+      addresses: [],
+      isLoading: true,
+      error: null,
+    };
+  },
+  [actions.fetchAddressesSuccess](state, { payload }) {
+    return {
+      ...state,
+      addresses: payload,
+      isLoading: false,
+      error: null,
+    };
+  },
+  [actions.fetchAddressesFailure](state, { payload }) {
+    return {
+      ...state,
+      addresses: [],
+      isLoading: false,
+      error: payload,
+    };
+  },
+}, addressesInitialState);
+
+export default combineReducers({
+  routes,
+  addresses,
+});

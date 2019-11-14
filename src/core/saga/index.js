@@ -1,9 +1,8 @@
 import { all } from 'redux-saga/effects';
 
-import { signInSaga, signUpSaga } from '../../App/containers/AuthPage/store';
+import { signInSaga, signUpSaga } from '../../App/containers/withAuthLayout/store';
 import { fetchProfileSaga, createProfileSaga } from '../../App/containers/ProfilePage/store';
-import { addressListSaga } from '../../App/containers/AddressesForm/store';
-import { mapRouteSaga } from '../../App/containers/MapPage/store';
+import { routesSaga, addressesSaga } from '../../App/containers/MapPage/store';
 
 export default function* rootSaga() {
   yield all([
@@ -11,7 +10,7 @@ export default function* rootSaga() {
     signUpSaga(),
     fetchProfileSaga(),
     createProfileSaga(),
-    addressListSaga(),
-    mapRouteSaga(),
+    addressesSaga(),
+    routesSaga(),
   ]);
 }

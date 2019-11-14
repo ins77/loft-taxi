@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getSignIn } from '../../containers/AuthPage/store';
+import { getSignIn } from '../../containers/withAuthLayout/store';
 
 const mapStateToProps = state => ({
   signIn: getSignIn(state),
@@ -27,8 +27,6 @@ PrivateRoute.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
   }).isRequired,
   component: PropTypes.object.isRequired,
-  path: PropTypes.string.isRequired,
 };
 
- 
 export default connect(mapStateToProps)(PrivateRoute);

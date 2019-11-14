@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './shared/PrivateRoute';
 import SignIn from './containers/SignIn';
 import SignUp from './containers/SignUp';
 import Dashboard from './containers/Dashboard';

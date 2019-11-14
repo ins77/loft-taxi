@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink, withRouter } from 'react-router-dom';
 
-import Logo from '../Logo';
+import Logo from '../../shared/Logo';
 
 const useStyles = makeStyles(theme => ({
   button: {
