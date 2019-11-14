@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 
 import { getSignUp, signUpRequest, initSignUp } from '../AuthPage/store';
 import AuthPage from '../AuthPage';
-import TextInput from '../../components/TextInput';
+import FormikInput from '../../components/FormikInput';
 
 const mapStateToProps = state => ({
   signUp: getSignUp(state),
@@ -63,7 +63,7 @@ class SignUp extends Component {
               .required('Поле обязательное для заполнения'),
           })}>
           <Form data-testid="signup-form">
-            <TextInput 
+            <FormikInput 
               margin="normal"
               label="Адрес электронной почты"
               type="email"
@@ -72,7 +72,7 @@ class SignUp extends Component {
             />
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <TextInput
+                <FormikInput
                   margin="normal"
                   label="Имя"
                   name="name"
@@ -80,7 +80,7 @@ class SignUp extends Component {
                 />
               </Grid>
               <Grid item xs={6}>
-                <TextInput
+                <FormikInput
                   fullWidth
                   margin="normal"
                   label="Фамилия"
@@ -88,7 +88,7 @@ class SignUp extends Component {
                 />
               </Grid>
             </Grid>
-            <TextInput
+            <FormikInput
               fullWidth
               margin="normal"
               label="Пароль"

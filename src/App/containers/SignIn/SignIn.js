@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 
 import { signInRequest } from '../AuthPage/store';
 import AuthPage from '../AuthPage';
-import TextInput from '../../components/TextInput';
+import FormikInput from '../../components/FormikInput';
 import { getSignIn } from '../AuthPage/store';
 
 const mapStateToProps = state => ({
@@ -44,16 +44,17 @@ class SignIn extends Component {
             password: Yup.string()
               .min(6, 'Пароль должен состоять минимум из 6 символов')
               .required('Поле обязательное для заполнения'),
-          })}>
+          })}
+        >
           <Form data-testid="signin-form">
-            <TextInput
+            <FormikInput
               name="email"
               margin="normal"
               label="Email"
               fullWidth
               errorMessage={error}
             />
-            <TextInput
+            <FormikInput
               name="password"
               margin="normal"
               label="Пароль"

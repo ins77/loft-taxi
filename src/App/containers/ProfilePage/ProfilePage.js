@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import PaperBox from '../../components/PaperBox/PaperBox';
-import ProfileForm from '../ProfileForm/ProfileForm';
-import { initCreateCard, getProfile } from './store';
+import ProfileForm from '../../components/ProfileForm';
+import { initCreateCard, createCardRequest, getProfile } from './store';
+import { getSignIn } from '../AuthPage/store';
+import Spinner from '../../components/Spinner';
 
 const mapStateToProps = state => ({
   profile: getProfile(state),
+  signIn: getSignIn(state),
 });
 
 class ProfilePage extends Component {
@@ -16,8 +19,14 @@ class ProfilePage extends Component {
     this.props.initCreateCard();
   }
 
+  handleSubmitProfile = values => {
+    const { createCardRequest, signIn } = this.props;
+
+    createCardRequest({ ...values, token: signIn.token });
+  }
+
   render() {
-    const { profile: { submitted } } = this.props;
+    const { profile: { submitted, isLoading, card } } = this.props;
 
     return (
       <div data-testid="profile-page">
@@ -30,7 +39,7 @@ class ProfilePage extends Component {
               Способ оплаты
             </Typography>
             <Box mt={5}>
-              {!submitted && <ProfileForm />}
+              {!submitted && <ProfileForm card={card} handleSubmitProfile={this.handleSubmitProfile} />}
 
               {submitted && (
                 <Box align="center">
@@ -42,6 +51,8 @@ class ProfilePage extends Component {
                   <Button variant="contained" to="/dashboard/map" component={Link}>Перейти на карту</Button>
                 </Box>
               )}
+
+              <Spinner show={isLoading} />
             </Box>
           </PaperBox>
         </Box>
@@ -50,4 +61,4 @@ class ProfilePage extends Component {
   }
 }
 
-export default connect(mapStateToProps, { initCreateCard })(ProfilePage);
+export default connect(mapStateToProps, { initCreateCard, createCardRequest })(ProfilePage);
